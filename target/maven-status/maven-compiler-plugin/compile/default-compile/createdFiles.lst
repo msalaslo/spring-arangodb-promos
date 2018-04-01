@@ -1,6 +1,0 @@
-com\msl\data\arangodb\got\GotConfiguration.class
-com\arangodb\springframework\repository\ArangoRepositoryFactoryBean.class
-com\msl\data\arangodb\got\GotApp.class
-com\msl\data\arangodb\got\runner\CrudRunner.class
-com\msl\data\arangodb\got\entity\Character.class
-com\msl\data\arangodb\got\repository\CharacterRepository.class
