@@ -1,0 +1,1 @@
+# spring-arangodb-promos

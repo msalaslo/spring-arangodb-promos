@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Implementation-Title: spring-data-arangodb
+Implementation-Title: spring-data-arangodb-promo
 Implementation-Version: 0.0.1-SNAPSHOT
 Built-By: Miguel
 Implementation-Vendor-Id: com.msl.data.arangodb
