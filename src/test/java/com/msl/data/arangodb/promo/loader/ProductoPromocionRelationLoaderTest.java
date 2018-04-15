@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class ProductoPromocionRelationLoaderTest {
 
-	public static final int NUM_PRODS = 10000;
+	public static final int NUM_PRODS = 100000;
 	
 	@Autowired
 	ProductoPromocionRelationsLoader loader;
