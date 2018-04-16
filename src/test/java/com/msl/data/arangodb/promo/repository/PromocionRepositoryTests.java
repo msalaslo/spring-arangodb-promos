@@ -90,8 +90,12 @@ public class PromocionRepositoryTests {
 
 	@Test
 	public void checkSize() {
-		List<Promocion> result = repository.findAll();
-		System.out.println("Product repository size:" + result.size());
+		Iterable<Promocion> result = repository.findAll();
+		int size = 0;
+		for(Promocion value : result) {
+		   size++;
+		}
+		System.out.println("Product repository size:" + size);
 		assertThat(result).isNotNull();
 	}
 	

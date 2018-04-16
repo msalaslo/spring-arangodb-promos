@@ -9,18 +9,20 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ProductoPromocionRelationLoaderTest {
+public class PromocionLoaderTest {
+
+	public static final int NUM_PROMOCIONES = 10;
 	
 	@Autowired
-	ProductoPromocionRelationsLoader loader;
-
+	PromocionLoader loader;
+	
 	@Before
 	public void setUp() {
 		loader.deleteAll();
 	}
 
 	@Test
-	public void loadRealtions() {
-		loader.load();
+	public void createPromociones() {
+		loader.load(NUM_PROMOCIONES);
 	}
 }

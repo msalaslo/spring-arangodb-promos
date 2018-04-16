@@ -9,10 +9,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ProductoPromocionRelationLoaderTest {
-	
+public class EntidadPromocionRelationLoaderTest {
+
 	@Autowired
-	ProductoPromocionRelationsLoader loader;
+	EntidadPromocionRelationsLoader loader;
 
 	@Before
 	public void setUp() {

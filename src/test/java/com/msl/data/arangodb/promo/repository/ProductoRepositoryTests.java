@@ -19,7 +19,7 @@ import com.msl.data.arangodb.promo.entity.Producto;
 @SpringBootTest
 public class ProductoRepositoryTests {
 
-	public static final int NUM_PRODS = 10000;
+	public static final int NUM_PRODS = 10;
 	
 	@Autowired
 	ProductoRepository repository;
@@ -41,6 +41,7 @@ public class ProductoRepositoryTests {
 	public void setUp() {
 		repository.deleteAll();
 		repository.save(new Producto(referencia, "setup"));
+		createProductos();
 	}
 
 	@Test
@@ -49,19 +50,31 @@ public class ProductoRepositoryTests {
 		assertThat(result).extracting("referencia").contains(referencia);
 	}
 
-	@Test
-	public void createProductos() {
+
+	private void createProductos() {
 		Collection<Producto> result = createProductos(NUM_PRODS);
 	    System.out.println(String.format("Save %s additional products", result.size()));
 	    repository.save(result);
-		assertThat(result).extracting("referencia").contains(referencia);
 	}
 	
 	@Test
 	public void checkSize() {
-		List<Producto> result = repository.findAll();
-		System.out.println("Product repository size:" + result.size());
+		Iterable<Producto> result = repository.findAll();
+		int size = 0;
+		for(Producto value : result) {
+		   size++;
+		}
+		System.out.println("Product repository size:" + size);
 		assertThat(result).isNotNull();
+	}
+	
+	@Test
+	public void findAll() {
+		Iterable<Producto> productos = repository.findAll();
+		for(Producto product : productos) {
+		   assertThat(product).isNotNull();
+		   System.out.println("Product name:" + product.getName());
+		}
 	}
 
 	public static Collection<Producto> createProductos(int numProductos) {

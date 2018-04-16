@@ -1,31 +1,32 @@
 package com.msl.data.arangodb.promo.entity;
 
 import org.springframework.data.annotation.Id;
+
 import com.arangodb.springframework.annotation.Edge;
 import com.arangodb.springframework.annotation.From;
 import com.arangodb.springframework.annotation.To;
 
 @Edge
-public class ProductoPromocion {
+public class PromocionEntidad {
 
 	@Id
 	private String id;
 
 	@From
-	private Producto producto;
+	private EntidadPromocionada entidad;
 
 	@To
 	private Promocion promocion;
 
-	public ProductoPromocion(final Producto producto, final Promocion promocion) {
+	public PromocionEntidad(final Promocion promocion, final EntidadPromocionada entidad) {
 		super();
-		this.producto = producto;
+		this.entidad = entidad;
 		this.promocion = promocion;
 	}
 
 	@Override
 	public String toString() {
-		return "Producto promocionado [id=" + id + ", producto=" + producto + ", promocion=" + promocion + "]";
+		return "Entidad promocionada [id=" + id + ", id entidad=" + entidad + ", cod promocion=" + promocion.getCpromoci() + "]";
 	}
 
 	public String getId() {
@@ -36,12 +37,12 @@ public class ProductoPromocion {
 		this.id = id;
 	}
 
-	public Producto getProducto() {
-		return producto;
+	public EntidadPromocionada getEntidad() {
+		return entidad;
 	}
 
-	public void setProducto(Producto producto) {
-		this.producto = producto;
+	public void setEntidad(EntidadPromocionada entidad) {
+		this.entidad = entidad;
 	}
 
 	public Promocion getPromocion() {

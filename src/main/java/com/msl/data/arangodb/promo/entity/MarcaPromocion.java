@@ -6,26 +6,26 @@ import com.arangodb.springframework.annotation.From;
 import com.arangodb.springframework.annotation.To;
 
 @Edge
-public class ProductoPromocion {
+public class MarcaPromocion {
 
 	@Id
 	private String id;
 
 	@From
-	private Producto producto;
+	private Marca marca;
 
 	@To
 	private Promocion promocion;
 
-	public ProductoPromocion(final Producto producto, final Promocion promocion) {
+	public MarcaPromocion(final Marca marca, final Promocion promocion) {
 		super();
-		this.producto = producto;
+		this.marca = marca;
 		this.promocion = promocion;
 	}
 
 	@Override
 	public String toString() {
-		return "Producto promocionado [id=" + id + ", producto=" + producto + ", promocion=" + promocion + "]";
+		return "Marca promocionada [id=" + id + ", marca=" + marca.getCmarmuma() + ", promocion=" + promocion.getCpromoci() + "]";
 	}
 
 	public String getId() {
@@ -36,12 +36,12 @@ public class ProductoPromocion {
 		this.id = id;
 	}
 
-	public Producto getProducto() {
-		return producto;
+	public Marca getMarca() {
+		return marca;
 	}
 
-	public void setProducto(Producto producto) {
-		this.producto = producto;
+	public void setMarca(Marca marca) {
+		this.marca = marca;
 	}
 
 	public Promocion getPromocion() {
