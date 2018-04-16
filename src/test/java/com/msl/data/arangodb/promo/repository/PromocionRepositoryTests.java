@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -85,7 +84,7 @@ public class PromocionRepositoryTests {
 
 	@Test
 	public void findByCodpromoci() {
-		Optional<Promocion> result = repository.findByCodpromoci(codpromoci);
+		Promocion result = repository.findByCodpromoci(codpromoci);
 		assertThat(result).extracting("codpromoci").contains(codpromoci);
 	}
 
