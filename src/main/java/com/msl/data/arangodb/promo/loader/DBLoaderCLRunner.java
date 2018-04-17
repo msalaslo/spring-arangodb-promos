@@ -10,7 +10,7 @@ import com.msl.data.arangodb.promo.repository.DBRepository;
 public class DBLoaderCLRunner implements CommandLineRunner {
 
 	public static final int NUM_MARCAS = 2;
-	public static final int NUM_PRODUCTOS = 10;
+	public static final int NUM_PRODUCTOS = 1000;
 	public static final int NUM_PROMOS = 5;
 
 	@Autowired

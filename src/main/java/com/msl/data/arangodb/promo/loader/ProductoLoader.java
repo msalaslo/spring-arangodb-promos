@@ -41,6 +41,17 @@ public class ProductoLoader {
 	}
 
 	private List<Producto> createProductos(int numProductos) {
+		int groups = numProductos/100;
+		List<Producto> productos = new ArrayList<Producto>();
+		if(groups > 0) {
+			for(int i=0;i<groups;i++) {
+				productos.addAll(createProductos(i, numProductos));
+			}
+		}
+		return productos;
+	}
+
+	private List<Producto> createProductos(int start, int numProductos) {
 		String cempresa = "123";
 		String centrooo = "1234";
 		String cdepartm = "1234";
@@ -53,7 +64,7 @@ public class ProductoLoader {
 		String cmarmuma = "12345678901234";
 		String referencia = cempresa + centrooo + cdepartm + cfamilia + cbarraaa + ctallaec + cdivisio + cniveln + cfabrica + cmarmuma;
 		List<Producto> productos = new ArrayList<Producto>();
-		for (int i = 0; i < numProductos; i++) {
+		for (int i = start; i < numProductos; i++) {
 			productos.add(new Producto(referencia + i , "producto" + i));
 		}
 	    return productos;
