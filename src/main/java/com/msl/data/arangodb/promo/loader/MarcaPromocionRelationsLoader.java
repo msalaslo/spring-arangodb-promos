@@ -22,7 +22,7 @@ public class MarcaPromocionRelationsLoader {
 	@Autowired
 	private MarcaPromocionRepository marcaPromoRepo;
 
-	public void load() {
+	public void fullLoad() {
 		// first create some relations for the marcas and promos
 		Iterable<Marca> marcas = marcaRepo.findAll();
 		Iterable<Promocion> promociones = promocionRepo.findAll();
@@ -32,6 +32,22 @@ public class MarcaPromocionRelationsLoader {
 			}	
 		}
 		
+		marcas = marcaRepo.findAll();
+		for (Marca marca : marcas) {
+			promociones = marca.getPromociones();
+			promociones.forEach(System.out::println);
+		}
+	}
+	
+	public void onePromoLoad() {
+		// first create some relations for the marcas and promos
+		Iterable<Marca> marcas = marcaRepo.findAll();
+		Iterable<Promocion> promociones = promocionRepo.findAll();
+		Promocion promocion = promociones.iterator().next();
+		for (Marca marca : marcas) {		
+				marcaPromoRepo.save(new MarcaPromocion(marca, promocion));
+		}	
+				
 		marcas = marcaRepo.findAll();
 		for (Marca marca : marcas) {
 			promociones = marca.getPromociones();

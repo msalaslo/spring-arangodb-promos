@@ -23,7 +23,7 @@ public class PromocionService {
     public Iterable<Promocion> findByCanlvnta(String canlvnta){
     	return repository.findByCanlvnta(canlvnta);
     }
-
+    
 	public Promocion save(Promocion promocion) {
 		return repository.save(promocion);
 	}

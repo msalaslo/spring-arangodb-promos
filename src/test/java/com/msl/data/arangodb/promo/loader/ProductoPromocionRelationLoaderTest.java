@@ -20,7 +20,7 @@ public class ProductoPromocionRelationLoaderTest {
 	}
 
 	@Test
-	public void loadRealtions() {
-		loader.load();
+	public void loadRelations() {
+		loader.sharePromocionesLoad();
 	}
 }

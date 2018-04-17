@@ -2,6 +2,7 @@ package com.msl.data.arangodb.promo.entity;
 
 import java.util.Collection;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.springframework.data.annotation.Id;
 
 import com.arangodb.springframework.annotation.Document;
@@ -21,6 +22,9 @@ public class Producto {
 	
 	@Relations(edges = ProductoPromocion.class, lazy = true)
 	private Collection<Promocion> promociones;
+	
+	@Relations(edges = ProductoMarca.class, lazy = true)
+	private Collection<Marca> marcas;
 	
 	public Producto(String referencia, String name) {
 		super();
@@ -59,5 +63,23 @@ public class Producto {
 	public void setPromociones(Collection<Promocion> promociones) {
 		this.promociones = promociones;
 	}
+	
+	public Collection<Marca> getMarcas() {
+		return marcas;
+	}
 
+	public void setMarcas(Collection<Marca> marcas) {
+		this.marcas = marcas;
+	}
+	
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).
+        		append("PRODUCTO:" + name).
+        		append("id", id).
+                append("referencia", referencia).
+                append("promociones", promociones).
+          	    append("marcas", marcas).
+        		toString();
+    }
 }

@@ -9,10 +9,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class EntidadPromocionRelationLoaderTest {
-
+public class ProductoMarcaRelationLoaderTest {
+	
 	@Autowired
-	EntidadPromocionRelationsLoader loader;
+	ProductoMarcaRelationsLoader loader;
 
 	@Before
 	public void setUp() {
@@ -20,7 +20,12 @@ public class EntidadPromocionRelationLoaderTest {
 	}
 
 	@Test
-	public void loadRealtions() {
-		loader.load();
+	public void loadRelations() {
+		loader.fullLoad();
+	}
+	
+	@Test
+	public void shareMarcasLoad() {
+		loader.shareMarcasLoad();
 	}
 }

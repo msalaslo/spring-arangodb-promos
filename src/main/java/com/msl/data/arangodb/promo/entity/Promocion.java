@@ -13,6 +13,8 @@ public class Promocion {
 	@Id
     public String id;
 	
+	public String name;
+	
 	public String codpromoci;
 	
 	public String canlvnta;
@@ -91,6 +93,7 @@ public class Promocion {
     	    String xtipobon,
     	    String xusopweb) {
         super();
+        this.name = "promo" + codpromoci;
         this.codpromoci = codpromoci;
         this.canlvnta = canlvnta;
 	    this.dticprom = dticprom;
@@ -115,6 +118,7 @@ public class Promocion {
     @Override
     public String toString() {
         return new ToStringBuilder(this).
+        		append("PROMOCION:" + name).
         		append("id", id).
                 append("codpromoci", codpromoci).
                 append("canlvnta","canlvnta").
@@ -296,6 +300,14 @@ public class Promocion {
 
 	public void setXusopweb(String xusopweb) {
 		this.xusopweb = xusopweb;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 

@@ -14,7 +14,7 @@ public class ProductoLoaderTest {
 	public static final int NUM_PRODUCTOS = 10;
 	
 	@Autowired
-	PromocionLoader loader;
+	ProductoLoader loader;
 	
 	@Before
 	public void setUp() {
