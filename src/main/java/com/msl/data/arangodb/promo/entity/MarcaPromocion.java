@@ -16,11 +16,14 @@ public class MarcaPromocion {
 
 	@To
 	private Promocion promocion;
+	
+	private String name;
 
 	public MarcaPromocion(final Marca marca, final Promocion promocion) {
 		super();
 		this.marca = marca;
 		this.promocion = promocion;
+		this.name = "M:" + marca.getName() + "/P:" + promocion.getName();
 	}
 
 	@Override
@@ -50,6 +53,14 @@ public class MarcaPromocion {
 
 	public void setPromocion(Promocion promocion) {
 		this.promocion = promocion;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

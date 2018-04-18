@@ -16,7 +16,7 @@ import com.msl.data.arangodb.promo.util.Util;
 
 
 @Component
-public class ProductoPromocionRelationsLoader {
+public class ProductoPromocionRelationsLoader implements IRepositoryLoader{
 	@Autowired
 	private ProductoRepository productoRepo;
 	
@@ -70,15 +70,15 @@ public class ProductoPromocionRelationsLoader {
 			}else {
 				cont++;
 			}			
-			System.out.println("Asociando el producto " + producto + " a la promocion " + promocion );
+//			System.out.println("Asociando el producto " + producto + " a la promocion " + promocion );
 			productoPromoRepo.save(new ProductoPromocion(producto, promocion));
 		}	
 				
-		productos = productoRepo.findAll();
-		for (Producto productoConPromocion : productos) {
-			Collection<Promocion> promocionesProd = productoConPromocion.getPromociones();
-			System.out.println("producto:" + productoConPromocion + " promocion:" + promocionesProd);
-		}
+//		productos = productoRepo.findAll();
+//		for (Producto productoConPromocion : productos) {
+//			Collection<Promocion> promocionesProd = productoConPromocion.getPromociones();
+//			System.out.println("producto:" + productoConPromocion + " promocion:" + promocionesProd);
+//		}
 	}
 	
 	public void deleteAll() {

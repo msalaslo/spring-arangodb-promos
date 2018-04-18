@@ -13,7 +13,7 @@ import com.msl.data.arangodb.promo.entity.Producto;
 import com.msl.data.arangodb.promo.repository.ProductoRepository;
 
 @Component
-public class ProductoLoader {
+public class ProductoLoader implements IRepositoryLoader{
 
 	@Autowired
 	private ProductoRepository repository;
@@ -23,15 +23,15 @@ public class ProductoLoader {
 	}
 
 	public void load(final int numProductos) {    
-	    Iterable<Producto> productos = createProductos(numProductos);
-	    System.out.println(String.format("Save %s additional productos", productos));
-	    repository.save(productos);
-	     
-	    Iterable<Producto> all = repository.findAll();
-	    long count = StreamSupport.stream(Spliterators.spliteratorUnknownSize(all.iterator(), 0), false).count();
-	    System.out.println(String.format("A total of %s productos are persisted in the database", count));
+		saveProductos(numProductos);
+//	    Iterable<Producto> productos = saveProductos(numProductos);
+//	    System.out.println(String.format("Save %s additional productos", numProductos));
+	    	     
+//	    Iterable<Producto> all = repository.findAll();
+//	    long count = StreamSupport.stream(Spliterators.spliteratorUnknownSize(all.iterator(), 0), false).count();
+//	    System.out.println(String.format("A total of %s productos are persisted in the database", count));
 	    
-	    printAllProductosByName(repository);
+//	    printAllProductosByName(repository);
 	}
 	
 	public static void printAllProductosByName(ProductoRepository repository) {
@@ -40,15 +40,13 @@ public class ProductoLoader {
 		allSorted.forEach(System.out::println);
 	}
 
-	private List<Producto> createProductos(int numProductos) {
+	private void saveProductos(int numProductos) {
 		int groups = numProductos/100;
-		List<Producto> productos = new ArrayList<Producto>();
 		if(groups > 0) {
 			for(int i=0;i<groups;i++) {
-				productos.addAll(createProductos(i, numProductos));
+				repository.save(createProductos(i, numProductos));
 			}
 		}
-		return productos;
 	}
 
 	private List<Producto> createProductos(int start, int numProductos) {

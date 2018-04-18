@@ -14,7 +14,7 @@ import com.msl.data.arangodb.promo.entity.Promocion;
 import com.msl.data.arangodb.promo.repository.PromocionRepository;
 
 @Component
-public class PromocionLoader {
+public class PromocionLoader implements IRepositoryLoader{
 
 	@Autowired
 	private PromocionRepository repository;
@@ -25,14 +25,14 @@ public class PromocionLoader {
 
 	public void load(final int numPromociones) {    
 	    Collection<Promocion> promociones = createPromos(numPromociones);
-	    System.out.println(String.format("Save %s additional promociones", promociones.size()));
+//	    System.out.println(String.format("Save %s additional promociones", promociones.size()));
 	    repository.save(promociones);
 	     
-	    Iterable<Promocion> all = repository.findAll();
-	    long count = StreamSupport.stream(Spliterators.spliteratorUnknownSize(all.iterator(), 0), false).count();
-	    System.out.println(String.format("A total of %s promociones are persisted in the database", count));
+//	    Iterable<Promocion> all = repository.findAll();
+//	    long count = StreamSupport.stream(Spliterators.spliteratorUnknownSize(all.iterator(), 0), false).count();
+//	    System.out.println(String.format("A total of %s promociones are persisted in the database", count));
 	    
-	    printAllPromosByCodpromoci(repository);
+//	    printAllPromosByCodpromoci(repository);
 	}
 	
 	public static void printAllPromosByCodpromoci(PromocionRepository repository) {

@@ -16,11 +16,14 @@ public class ProductoPromocion {
 
 	@To
 	private Promocion promocion;
+	
+	private String name;
 
 	public ProductoPromocion(final Producto producto, final Promocion promocion) {
 		super();
 		this.producto = producto;
 		this.promocion = promocion;
+		this.name = "P:" + producto.getName() + "/P:" + promocion.getName();
 	}
 
 	@Override
@@ -52,4 +55,11 @@ public class ProductoPromocion {
 		this.promocion = promocion;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

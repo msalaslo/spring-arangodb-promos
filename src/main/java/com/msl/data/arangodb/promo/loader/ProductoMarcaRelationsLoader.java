@@ -16,7 +16,7 @@ import com.msl.data.arangodb.promo.util.Util;
 
 
 @Component
-public class ProductoMarcaRelationsLoader {
+public class ProductoMarcaRelationsLoader implements IRepositoryLoader{
 	@Autowired
 	private MarcaRepository marcaRepo;
 	
@@ -76,15 +76,15 @@ public class ProductoMarcaRelationsLoader {
 			}else {
 				cont++;
 			}			
-			System.out.println("Asociando el producto " + producto + " a la marca " + marca );
+//			System.out.println("Asociando el producto " + producto + " a la marca " + marca );
 			marcaProductoRepo.save(new ProductoMarca(producto, marca));
 		}	
 				
-		productos = productoRepo.findAll();
-		for (Producto productoConMarca : productos) {
-			Collection<Marca> marcasProd = productoConMarca.getMarcas();
-			System.out.println("producto:" + productoConMarca + "marca:" + marcasProd);
-		}
+//		productos = productoRepo.findAll();
+//		for (Producto productoConMarca : productos) {
+//			Collection<Marca> marcasProd = productoConMarca.getMarcas();
+//			System.out.println("producto:" + productoConMarca + "marca:" + marcasProd);
+//		}
 	}
 	
 	public void deleteAll() {

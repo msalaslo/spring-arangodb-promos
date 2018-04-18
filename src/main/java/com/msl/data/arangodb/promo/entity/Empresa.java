@@ -11,8 +11,7 @@ public class Empresa {
 	
 	@Id
     public String id;
-	
-	
+		
 	public String cempresa;
 	
 	public Empresa(String cempresa) {
