@@ -14,9 +14,20 @@ public class Empresa {
 		
 	public String cempresa;
 	
-	public Empresa(String cempresa) {
+	public String name;
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public Empresa(String cempresa, String name) {
 		super();
 		this.cempresa = cempresa;
+		this.name = name;
 	}
 
 	public String getId() {
