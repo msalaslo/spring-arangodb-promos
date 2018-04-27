@@ -1,5 +1,7 @@
 package com.msl.data.arangodb.promo.controller;
 
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +30,7 @@ public class ProductoController {
 	ProductoService service;
 	
 	@GetMapping(path = "/findByid")
-    public Producto findByid(@RequestParam(value="id", required=false, defaultValue="0") String id, Model model) {
+    public Optional<Producto> findByid(@RequestParam(value="id", required=false, defaultValue="0") String id, Model model) {
         logger.debug("Buscando producto por id...");
         return service.findByid(id);
     }

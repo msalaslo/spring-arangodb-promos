@@ -1,5 +1,7 @@
 package com.msl.data.arangodb.promo.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +15,7 @@ public class MarcaService {
 	@Autowired
 	MarcaRepository repository;
 	
-    public Marca findByid(String id){
+    public Optional<Marca> findByid(String id){
     	return repository.findById(id);
     }
     

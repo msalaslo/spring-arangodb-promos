@@ -54,7 +54,7 @@ public class ProductoRepositoryTests {
 	private void createProductos() {
 		Collection<Producto> result = createProductos(NUM_PRODS);
 	    System.out.println(String.format("Save %s additional products", result.size()));
-	    repository.save(result);
+	    repository.saveAll(result);
 	}
 	
 	@Test

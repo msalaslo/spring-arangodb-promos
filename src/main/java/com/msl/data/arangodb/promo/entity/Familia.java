@@ -12,12 +12,14 @@ public class Familia {
 	@Id
     public String id;
 	
-	
 	public String cfamilia;
 	
-	public Familia(String cfamilia) {
+	public String name;
+	
+	public Familia(String cfamilia, String name) {
 		super();
 		this.cfamilia = cfamilia;
+		this.name = name;
 	}
 
 	public String getId() {

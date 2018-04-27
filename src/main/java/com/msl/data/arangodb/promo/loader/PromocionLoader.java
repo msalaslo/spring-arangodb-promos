@@ -26,7 +26,7 @@ public class PromocionLoader implements IRepositoryLoader{
 	public void load(final int numPromociones) {    
 	    Collection<Promocion> promociones = createPromos(numPromociones);
 //	    System.out.println(String.format("Save %s additional promociones", promociones.size()));
-	    repository.save(promociones);
+	    repository.saveAll(promociones);
 	     
 //	    Iterable<Promocion> all = repository.findAll();
 //	    long count = StreamSupport.stream(Spliterators.spliteratorUnknownSize(all.iterator(), 0), false).count();
