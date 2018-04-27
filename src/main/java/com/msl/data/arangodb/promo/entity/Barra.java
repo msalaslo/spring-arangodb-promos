@@ -14,9 +14,20 @@ public class Barra {
 	
 	public String cbarraaa;
 	
-	public Barra(String cbarraaa) {
+	public String name;
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public Barra(String cbarraaa, String name) {
 		super();
 		this.cbarraaa = cbarraaa;
+		this.name = name;
 	}
 
 	public String getId() {

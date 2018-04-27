@@ -14,9 +14,20 @@ public class Talla {
 	
 	public String ctallaec;
 	
-	public Talla(String ctallaec) {
+	public String name;
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public Talla(String ctallaec, String name) {
 		super();
 		this.ctallaec = ctallaec;
+		this.name = name;
 	}
 
 	public String getId() {

@@ -11,13 +11,23 @@ public class Departamento {
 	
 	@Id
     public String id;
-	
-	
+		
 	public String cdepartm;
 	
-	public Departamento(String cdepartm) {
+	public String name;
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public Departamento(String cdepartm, String name) {
 		super();
 		this.cdepartm = cdepartm;
+		this.name = name;
 	}
 
 	public String getId() {

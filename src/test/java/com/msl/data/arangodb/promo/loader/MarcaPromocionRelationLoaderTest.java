@@ -21,6 +21,6 @@ public class MarcaPromocionRelationLoaderTest {
 
 	@Test
 	public void loadRealtions() {
-		loader.shareMarcasLoad();
+		loader.loadPromociones(promocionables);
 	}
 }

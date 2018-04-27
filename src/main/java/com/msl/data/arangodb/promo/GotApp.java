@@ -12,10 +12,7 @@ import com.msl.data.arangodb.promo.loader.DBLoaderCLRunner;
 @SpringBootApplication
 public class GotApp {
 	public static void main(final String... args) {
-		Object[] runner = new Object[] {DBLoaderCLRunner.class};
-
+		SpringApplication.run(DBLoaderCLRunner.class, args);
 //		System.exit(SpringApplication.exit(SpringApplication.run(runner, args)));
-		SpringApplication.run(runner, args);
-
 	}
 }

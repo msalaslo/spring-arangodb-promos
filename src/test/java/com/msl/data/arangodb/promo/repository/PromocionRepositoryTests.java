@@ -103,7 +103,7 @@ public class PromocionRepositoryTests {
 	public void createPromociones() {
 		Collection<Promocion> result = createPromociones(NUM_PROMOS);
 		System.out.println(String.format("Save %s additional promos", NUM_PROMOS));
-		repository.save(result);
+		repository.saveAll(result);
 		assertThat(result).extracting("codpromoci").contains(codpromoci);
 	}
 	

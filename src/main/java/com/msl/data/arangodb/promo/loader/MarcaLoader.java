@@ -27,7 +27,7 @@ public class MarcaLoader implements IRepositoryLoader{
 	public void load(final int numMarcas) {    
 	    Collection<Marca> createMarcas = createMarcas(numMarcas);
 //	    System.out.println(String.format("Save %s additional marcas", numMarcas));
-	    repository.save(createMarcas);
+	    repository.saveAll(createMarcas);
 	     
 //	    Iterable<Marca> all = repository.findAll();
 //	    long count = StreamSupport.stream(Spliterators.spliteratorUnknownSize(all.iterator(), 0), false).count();

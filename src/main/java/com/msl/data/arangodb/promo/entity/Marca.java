@@ -11,7 +11,7 @@ import com.arangodb.springframework.annotation.Relations;
 
 @Document("marcas")
 @HashIndex(fields = { "cmarmuma"}, unique = true)
-public class Marca {
+public class Marca implements Promocionable{
 			
 	@Id
 	public String id;

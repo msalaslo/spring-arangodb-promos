@@ -14,9 +14,20 @@ public class Division {
 	
 	public String cdivisio;
 	
-	public Division(String cdivisio) {
+	public String name;
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public Division(String cdivisio, String name) {
 		super();
 		this.cdivisio = cdivisio;
+		this.name = name;
 	}
 
 	public String getId() {

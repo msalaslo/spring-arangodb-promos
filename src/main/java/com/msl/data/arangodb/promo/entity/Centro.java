@@ -11,13 +11,23 @@ public class Centro {
 	
 	@Id
     public String id;
-	
-	
+		
 	public String centroo;
 	
-	public Centro(String centroo) {
+	public String name;
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public Centro(String centroo, String name) {
 		super();
 		this.centroo = centroo;
+		this.name = name;
 	}
 
 	public String getId() {

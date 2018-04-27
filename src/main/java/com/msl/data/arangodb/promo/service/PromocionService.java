@@ -1,5 +1,7 @@
 package com.msl.data.arangodb.promo.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +14,7 @@ public class PromocionService {
 	@Autowired
 	PromocionRepository repository;
 	
-    public Promocion findByid(String id){
+    public Optional<Promocion> findByid(String id){
     	return repository.findById(id);
     }
     
