@@ -20,7 +20,7 @@ public class MarcaPromocionRelationLoaderTest {
 	}
 
 	@Test
-	public void loadRealtions() {
-		loader.loadPromociones(promocionables);
+	public void loadRelations() {
+		loader.loadPromociones();
 	}
 }

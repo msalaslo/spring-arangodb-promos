@@ -21,6 +21,6 @@ public class ProductoPromocionRelationLoaderTest {
 
 	@Test
 	public void loadRelations() {
-		loader.sharePromocionesLoad();
+		loader.loadPromociones();
 	}
 }

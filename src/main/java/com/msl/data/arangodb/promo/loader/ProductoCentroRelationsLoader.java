@@ -6,40 +6,40 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.msl.data.arangodb.promo.entity.Marca;
+import com.msl.data.arangodb.promo.entity.Centro;
 import com.msl.data.arangodb.promo.entity.Producto;
-import com.msl.data.arangodb.promo.entity.ProductoMarca;
+import com.msl.data.arangodb.promo.entity.ProductoCentro;
 import com.msl.data.arangodb.promo.entity.Relacionable;
 import com.msl.data.arangodb.promo.entity.RelacionableParent;
-import com.msl.data.arangodb.promo.repository.MarcaRepository;
-import com.msl.data.arangodb.promo.repository.ProductoMarcaRepository;
+import com.msl.data.arangodb.promo.repository.CentroRepository;
+import com.msl.data.arangodb.promo.repository.ProductoCentroRepository;
 import com.msl.data.arangodb.promo.repository.ProductoRepository;
 
 
 @Component
-public class ProductoMarcaRelationsLoader extends AbstractRelacionableRepositoryLoader implements IRepositoryLoader{
+public class ProductoCentroRelationsLoader extends AbstractRelacionableRepositoryLoader implements IRepositoryLoader{
 	@Autowired
-	private MarcaRepository marcaRepo;
+	private CentroRepository centroRepo;
 	
 	@Autowired
 	private ProductoRepository productoRepo;
 	
 	@Autowired
-	private ProductoMarcaRepository marcaProductoRepo;
+	private ProductoCentroRepository centroProductoRepo;
 	
 	@Override
 	public void loadRelaciones() {
-		// first create some relations for the productos and marcas
+		// first create some relations for the productos and centros
 		Iterable<Producto> productos = productoRepo.findAll();
-		Iterable<Marca> marcas = marcaRepo.findAll();
+		Iterable<Centro> centros = centroRepo.findAll();
 		List<Relacionable> relacionables = new ArrayList<Relacionable>();
 		for (Producto producto : productos) {
 			relacionables.add((Relacionable)producto);
 		}
 		
 		List<RelacionableParent> parents = new ArrayList<RelacionableParent>();
-		for (Marca marca : marcas) {
-			parents.add((RelacionableParent)marca);
+		for (Centro centro : centros) {
+			parents.add((RelacionableParent)centro);
 		}
 		
 		super.loadRelaciones(relacionables, parents);
@@ -47,11 +47,11 @@ public class ProductoMarcaRelationsLoader extends AbstractRelacionableRepository
 	
 	@Override
 	public void save(Relacionable relacionable, RelacionableParent parent) {
-		marcaProductoRepo.save(new ProductoMarca((Producto)relacionable, (Marca)parent));
+		centroProductoRepo.save(new ProductoCentro((Producto)relacionable, (Centro)parent));
 	}
 	
 	@Override
 	public void deleteAll() {
-		marcaProductoRepo.deleteAll();
+		centroProductoRepo.deleteAll();
 	}
 }

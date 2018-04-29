@@ -11,7 +11,7 @@ import com.arangodb.springframework.annotation.Relations;
 
 @Document("productos")
 @HashIndex(fields = { "referencia"}, unique = true)
-public class Producto {
+public class Producto implements Promocionable,Relacionable{
 	
 	@Id
     public String id;
@@ -25,6 +25,9 @@ public class Producto {
 	
 	@Relations(edges = ProductoMarca.class, lazy = true)
 	private Collection<Marca> marcas;
+	
+	@Relations(edges = ProductoCentro.class, lazy = true)
+	private Collection<Centro> centros;
 	
 	public Producto(String referencia, String name) {
 		super();

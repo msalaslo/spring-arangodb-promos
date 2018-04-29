@@ -10,12 +10,12 @@ import com.msl.data.arangodb.promo.repository.MarcaRepository;
 @ComponentScan("com.msl.data.arangodb.promo")
 public class DBLoaderCLRunner implements CommandLineRunner {
 
-	public static final int NUM_EMPRESAS = 2;
-	public static final int NUM_CENTROS = 3;
-	public static final int NUM_FAMILIAS = 1;
-	public static final int NUM_MARCAS = 10;
+	public static final int NUM_EMPRESAS = 10;
+	public static final int NUM_CENTROS = 100;
+	public static final int NUM_FAMILIAS = 10;
+	public static final int NUM_MARCAS = 100;
 	public static final int NUM_PRODUCTOS = 100;
-	public static final int NUM_PROMOS = 5;
+	public static final int NUM_PROMOS = 100;
 
 	@Autowired
 	DBRepository db;
@@ -39,7 +39,10 @@ public class DBLoaderCLRunner implements CommandLineRunner {
 	PromocionLoader promocionLoader;
 	
 	@Autowired
-	CentroEmpresaRelationsLoader centroEmpresaLoader;
+	EmpresaPromocionRelationsLoader empresaPromocionLoader;
+	
+	@Autowired
+	CentroPromocionRelationsLoader centroPromocionLoader;
 
 	@Autowired
 	ProductoPromocionRelationsLoader productoPromocionLoader;
@@ -48,7 +51,13 @@ public class DBLoaderCLRunner implements CommandLineRunner {
 	MarcaPromocionRelationsLoader marcaPromocionLoader;
 	
 	@Autowired
+	CentroEmpresaRelationsLoader centroEmpresaLoader;
+	
+	@Autowired
 	ProductoMarcaRelationsLoader productoMarcaLoader;
+	
+	@Autowired
+	ProductoCentroRelationsLoader productoCentroLoader;
 	
 	@Autowired
 	MarcaRepository marcaRepository;
@@ -56,13 +65,16 @@ public class DBLoaderCLRunner implements CommandLineRunner {
 	@Override
 	public void run(final String... args) throws Exception {
 		System.out.println("Borrando base de datos");
-		IRepositoryLoader[] loaders = {marcaLoader, productoLoader, promocionLoader, productoPromocionLoader, marcaPromocionLoader, productoMarcaLoader};
+		IRepositoryLoader[] loaders = {empresaLoader, centroLoader, familiaLoader, marcaLoader, productoLoader, promocionLoader, 
+				empresaPromocionLoader, centroPromocionLoader, marcaPromocionLoader, productoPromocionLoader, 
+				centroEmpresaLoader, productoCentroLoader, productoMarcaLoader 
+				};
 		//db.dropDatabase();
 		deleteRepositories(loaders);
 		System.out.println("Cargando empresas:" + NUM_EMPRESAS);
 		empresaLoader.load(NUM_EMPRESAS);
 		System.out.println("Cargando centros:" + NUM_CENTROS);
-		empresaLoader.load(NUM_CENTROS);		
+		centroLoader.load(NUM_CENTROS);		
 		System.out.println("Cargando familias:" + NUM_FAMILIAS);
 		familiaLoader.load(NUM_FAMILIAS);
 		System.out.println("Cargando marcas:" + NUM_MARCAS);
@@ -71,12 +83,22 @@ public class DBLoaderCLRunner implements CommandLineRunner {
 		productoLoader.load(NUM_PRODUCTOS);
 		System.out.println("Cargando promociones:" + NUM_PROMOS);
 		promocionLoader.load(NUM_PROMOS);
+		
+		System.out.println("Cargando promociones de empresas");
+		empresaPromocionLoader.loadPromociones();
+		System.out.println("Cargando promociones de centros");
+		centroPromocionLoader.loadPromociones();
 		System.out.println("Cargando promociones de productos");
-		productoPromocionLoader.sharePromocionesLoad();
+		productoPromocionLoader.loadPromociones();
 		System.out.println("Cargando promociones de marcas");
-		marcaPromocionLoader.loadPromociones(marcaRepository.findAll());
+		marcaPromocionLoader.loadPromociones();
+		
+		System.out.println("Cargando relaciones entre centros y empresas");
+		centroEmpresaLoader.loadRelaciones();
 		System.out.println("Cargando relaciones entre productos y marcas");
-		productoMarcaLoader.shareMarcasLoad();
+		productoMarcaLoader.loadRelaciones();
+		System.out.println("Cargando relaciones entre productos y centros");
+		productoCentroLoader.loadRelaciones();
 	}
 	
 	private void deleteRepositories(IRepositoryLoader[] loaders) {

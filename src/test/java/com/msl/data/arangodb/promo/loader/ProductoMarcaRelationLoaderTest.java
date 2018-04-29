@@ -18,14 +18,9 @@ public class ProductoMarcaRelationLoaderTest {
 	public void setUp() {
 		loader.deleteAll();
 	}
-
-	@Test
-	public void loadRelations() {
-		loader.fullLoad();
-	}
 	
 	@Test
-	public void shareMarcasLoad() {
-		loader.shareMarcasLoad();
+	public void loadMarcas() {
+		loader.loadRelaciones();
 	}
 }
