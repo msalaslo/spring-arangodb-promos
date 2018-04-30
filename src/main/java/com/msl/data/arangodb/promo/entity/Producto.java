@@ -75,7 +75,15 @@ public class Producto implements Promocionable,Relacionable{
 		this.marcas = marcas;
 	}
 	
-    @Override
+    public Collection<Centro> getCentros() {
+		return centros;
+	}
+
+	public void setCentros(Collection<Centro> centros) {
+		this.centros = centros;
+	}
+
+	@Override
     public String toString() {
         return new ToStringBuilder(this).
         		append("PRODUCTO:" + name).

@@ -41,7 +41,10 @@ public class ProductoLoader implements IRepositoryLoader{
 	}
 
 	private void saveProductos(int numProductos) {
-		int groups = numProductos/100;
+		int groups = 1;
+		if(numProductos > 100) {
+			groups = numProductos/100;
+		}
 		if(groups > 0) {
 			for(int i=0;i<groups;i++) {
 				repository.saveAll(createProductos(i, numProductos));

@@ -24,9 +24,14 @@ public abstract class AbstractPromocionableRepositoryLoader implements IPromocio
 		int section = numPromocionables/numPromociones;
 		int cont = 1;
 		Promocion promocion = itePromociones.next();
-		for (Promocionable promocionable : promocionables) {		
-			System.out.println("Asociando la promocion " + promocion + " al promocionable " + promocionable );
+	    boolean firstIterationFlag = true ;
+		for (Promocionable promocionable : promocionables) {	
+//			System.out.println("Asociando la promocion " + promocion + " al promocionable " + promocionable );
 			this.save(promocionable, promocion);
+			if(firstIterationFlag) {
+				System.out.println("Asociando la promociones a " + promocionable );
+				firstIterationFlag = false;
+			}
 			//Vamos asociando los promocionables a un conjunto equitativo de promociones
 			if(cont == section) {
 				if(itePromociones.hasNext()) {
