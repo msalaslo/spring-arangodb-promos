@@ -29,6 +29,9 @@ public class Producto implements Promocionable,Relacionable{
 	@Relations(edges = ProductoCentro.class, lazy = true)
 	private Collection<Centro> centros;
 	
+	@Relations(edges = ProductoFamilia.class, lazy = true)
+	private Collection<Familia> familias;
+	
 	public Producto(String referencia, String name) {
 		super();
 		this.referencia = referencia;
@@ -81,6 +84,14 @@ public class Producto implements Promocionable,Relacionable{
 
 	public void setCentros(Collection<Centro> centros) {
 		this.centros = centros;
+	}
+
+	public Collection<Familia> getFamilias() {
+		return familias;
+	}
+
+	public void setFamilias(Collection<Familia> familias) {
+		this.familias = familias;
 	}
 
 	@Override

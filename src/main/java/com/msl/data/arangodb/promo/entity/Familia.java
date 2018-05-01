@@ -1,13 +1,16 @@
 package com.msl.data.arangodb.promo.entity;
 
+import java.util.Collection;
+
 import org.springframework.data.annotation.Id;
 
 import com.arangodb.springframework.annotation.Document;
 import com.arangodb.springframework.annotation.HashIndex;
+import com.arangodb.springframework.annotation.Relations;
 
 @Document("familias")
 @HashIndex(fields = { "cfamilia"}, unique = true)
-public class Familia {
+public class Familia implements Promocionable,RelacionableParent{
 	
 	@Id
     public String id;
@@ -15,6 +18,17 @@ public class Familia {
 	public String cfamilia;
 	
 	public String name;
+	
+	@Relations(edges = EmpresaPromocion.class, lazy = true)
+	public Collection<Promocion> promociones;
+	
+	public Collection<Promocion> getPromociones() {
+		return promociones;
+	}
+
+	public void setPromociones(Collection<Promocion> promociones) {
+		this.promociones = promociones;
+	}
 	
 	public String getName() {
 		return name;

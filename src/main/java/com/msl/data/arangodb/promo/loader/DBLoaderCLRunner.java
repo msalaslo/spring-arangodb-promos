@@ -5,16 +5,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.ComponentScan;
 
 import com.msl.data.arangodb.promo.repository.DBRepository;
-import com.msl.data.arangodb.promo.repository.MarcaRepository;
 
 @ComponentScan("com.msl.data.arangodb.promo")
 public class DBLoaderCLRunner implements CommandLineRunner {
 
-	public static final int NUM_EMPRESAS = 10;
-	public static final int NUM_CENTROS = 100;
-	public static final int NUM_FAMILIAS = 100;
-	public static final int NUM_MARCAS = 1000;
-	public static final int NUM_PRODUCTOS = 10000;
+	public static final int NUM_EMPRESAS = 5;
+	public static final int NUM_CENTROS = 10;
+	public static final int NUM_FAMILIAS = 10;
+	public static final int NUM_MARCAS = 100;
+	public static final int NUM_PRODUCTOS = 1000;
 	public static final int NUM_PROMOS = 10;
 
 	@Autowired
@@ -39,18 +38,6 @@ public class DBLoaderCLRunner implements CommandLineRunner {
 	PromocionLoader promocionLoader;
 	
 	@Autowired
-	EmpresaPromocionRelationsLoader empresaPromocionLoader;
-	
-	@Autowired
-	CentroPromocionRelationsLoader centroPromocionLoader;
-
-	@Autowired
-	ProductoPromocionRelationsLoader productoPromocionLoader;
-
-	@Autowired
-	MarcaPromocionRelationsLoader marcaPromocionLoader;
-	
-	@Autowired
 	CentroEmpresaRelationsLoader centroEmpresaLoader;
 	
 	@Autowired
@@ -60,7 +47,22 @@ public class DBLoaderCLRunner implements CommandLineRunner {
 	ProductoCentroRelationsLoader productoCentroLoader;
 	
 	@Autowired
-	MarcaRepository marcaRepository;
+	ProductoFamiliaRelationsLoader productoFamiliaLoader;
+	
+	@Autowired
+	EmpresaPromocionRelationsLoader empresaPromocionLoader;
+	
+	@Autowired
+	CentroPromocionRelationsLoader centroPromocionLoader;
+	
+	@Autowired
+	FamiliaPromocionRelationsLoader familiaPromocionLoader;
+
+	@Autowired
+	ProductoPromocionRelationsLoader productoPromocionLoader;
+
+	@Autowired
+	MarcaPromocionRelationsLoader marcaPromocionLoader;
 	
 	@Override
 	public void run(final String... args) throws Exception {
@@ -88,6 +90,8 @@ public class DBLoaderCLRunner implements CommandLineRunner {
 		empresaPromocionLoader.loadPromociones();
 		System.out.println("Cargando promociones de centros");
 		centroPromocionLoader.loadPromociones();
+		System.out.println("Cargando promociones de familias");
+		familiaPromocionLoader.loadPromociones();
 		System.out.println("Cargando promociones de productos");
 		productoPromocionLoader.loadPromociones();
 		System.out.println("Cargando promociones de marcas");
@@ -99,6 +103,8 @@ public class DBLoaderCLRunner implements CommandLineRunner {
 		productoMarcaLoader.loadRelaciones();
 		System.out.println("Cargando relaciones entre productos y centros");
 		productoCentroLoader.loadRelaciones();
+		System.out.println("Cargando relaciones entre productos y familias");
+		productoFamiliaLoader.loadRelaciones();
 	}
 	
 	private void deleteRepositories(IRepositoryLoader[] loaders) {
