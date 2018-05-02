@@ -2,11 +2,10 @@ package com.msl.data.arangodb.promo.loader;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Spliterators;
-import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Component;
 
 import com.msl.data.arangodb.promo.entity.Producto;
@@ -23,15 +22,16 @@ public class ProductoLoader implements IRepositoryLoader{
 	}
 
 	public void load(final int numProductos) {    
-		saveProductos(numProductos);
-//	    Iterable<Producto> productos = saveProductos(numProductos);
-//	    System.out.println(String.format("Save %s additional productos", numProductos));
-	    	     
-//	    Iterable<Producto> all = repository.findAll();
-//	    long count = StreamSupport.stream(Spliterators.spliteratorUnknownSize(all.iterator(), 0), false).count();
-//	    System.out.println(String.format("A total of %s productos are persisted in the database", count));
-	    
-//	    printAllProductosByName(repository);
+		saveProductos(numProductos, 0);
+	}
+	
+	
+	public void add(final int numProductos) {
+		Sort sort = new Sort(new Sort.Order(Direction.DESC, "name"));
+		Iterable<Producto> productos = repository.findAll(sort);
+		Producto first = productos.iterator().next();
+		String lastProductoIndex = first.getName().substring("producto".length(),first.getName().length());
+		saveProductos(numProductos, Integer.parseInt(lastProductoIndex));
 	}
 	
 	public static void printAllProductosByName(ProductoRepository repository) {
@@ -40,13 +40,13 @@ public class ProductoLoader implements IRepositoryLoader{
 		allSorted.forEach(System.out::println);
 	}
 
-	private void saveProductos(int numProductos) {
+	private void saveProductos(int numProductos, int start) {
 		int groups = 1;
 		if(numProductos > 100) {
 			groups = numProductos/100;
 		}
 		if(groups > 0) {
-			for(int i=0;i<groups;i++) {
+			for(int i=start;i<groups+start;i++) {
 				repository.saveAll(createProductos(i, numProductos));
 			}
 		}
@@ -65,7 +65,7 @@ public class ProductoLoader implements IRepositoryLoader{
 		String cmarmuma = "12345678901234";
 		String referencia = cempresa + centrooo + cdepartm + cfamilia + cbarraaa + ctallaec + cdivisio + cniveln + cfabrica + cmarmuma;
 		List<Producto> productos = new ArrayList<Producto>();
-		for (int i = start; i < numProductos; i++) {
+		for (int i = start; i < numProductos + start; i++) {
 			productos.add(new Producto(referencia + i , "producto" + i));
 		}
 	    return productos;

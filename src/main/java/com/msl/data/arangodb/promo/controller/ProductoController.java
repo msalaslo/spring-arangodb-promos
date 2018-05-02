@@ -64,4 +64,10 @@ public class ProductoController {
     	Producto savedProduct = this.service.save(producto);
         return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
     }
+    
+	@GetMapping(path = "/add")
+    public void add(@RequestParam(value="num", required=false, defaultValue="0") int num) {
+        logger.debug("Añadiendo promociones..." + num);
+        service.add(num);
+    }
 }
