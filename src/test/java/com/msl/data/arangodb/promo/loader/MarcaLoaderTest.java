@@ -10,8 +10,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MarcaLoaderTest {
-
-	public static final int NUM_MARCAS = 10;
 	
 	@Autowired
 	MarcaLoader loader;
@@ -23,6 +21,6 @@ public class MarcaLoaderTest {
 
 	@Test
 	public void createMarcas() {
-		loader.load(NUM_MARCAS);
+		loader.load();
 	}
 }

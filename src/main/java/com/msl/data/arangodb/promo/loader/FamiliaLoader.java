@@ -20,8 +20,8 @@ public class FamiliaLoader implements IRepositoryLoader{
 	    repository.deleteAll();
 	}
 
-	public void load(final int numFamilias) {    
-	    List<Familia> createFamilias = createFamilias(numFamilias);
+	public void load() {    
+	    List<Familia> createFamilias = createFamilias(RepositoryConfig.NUM_FAMILIAS);
 	    repository.saveAll(createFamilias);
 	}
 	

@@ -10,8 +10,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ProductoLoaderTest {
-
-	public static final int NUM_PRODUCTOS = 10;
 	
 	@Autowired
 	ProductoLoader loader;
@@ -23,6 +21,6 @@ public class ProductoLoaderTest {
 
 	@Test
 	public void createProductos() {
-		loader.load(NUM_PRODUCTOS);
+		loader.load();
 	}
 }

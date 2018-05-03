@@ -16,7 +16,7 @@ public class CentroPromocionRelationLoaderTest {
 
 	@Before
 	public void setUp() {
-		loader.deleteAll();
+		loader.deletePromociones();
 	}
 
 	@Test

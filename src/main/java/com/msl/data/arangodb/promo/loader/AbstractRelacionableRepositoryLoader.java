@@ -8,7 +8,6 @@ import com.msl.data.arangodb.promo.util.Util;
 
 public abstract class AbstractRelacionableRepositoryLoader implements IRelacionableRepositoryLoader{
 	
-	@Override
 	public void loadRelaciones(Iterable<Relacionable> relacionables, Iterable<RelacionableParent> parents) {
 		int numParents = Util.getSize(parents);
 		int numRelacionables = Util.getSize(relacionables);

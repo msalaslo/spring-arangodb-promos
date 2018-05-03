@@ -15,7 +15,7 @@ import com.msl.data.arangodb.promo.repository.ProductoRepository;
 
 
 @Component
-public class ProductoPromocionRelationsLoader extends AbstractPromocionableRepositoryLoader implements IRepositoryLoader{
+public class ProductoPromocionRelationsLoader extends AbstractPromocionableRepositoryLoader implements IPromocionableRepositoryLoader{
 	@Autowired
 	private ProductoRepository productoRepo;
 
@@ -23,7 +23,7 @@ public class ProductoPromocionRelationsLoader extends AbstractPromocionableRepos
 	private ProductoPromocionReposiroty productoPromoRepo;
 
 	@Override
-	public void deleteAll() {
+	public void deletePromociones() {
 		productoPromoRepo.deleteAll();
 	}
 	

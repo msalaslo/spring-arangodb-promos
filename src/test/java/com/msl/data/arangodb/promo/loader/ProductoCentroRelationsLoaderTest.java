@@ -16,7 +16,7 @@ public class ProductoCentroRelationsLoaderTest {
 	
 	@Before
 	public void setUp() {
-		loader.deleteAll();
+		loader.deleteRelaciones();
 	}
 	
 	@Test

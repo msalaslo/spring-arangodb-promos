@@ -20,8 +20,8 @@ public class CentroLoader implements IRepositoryLoader{
 	    repository.deleteAll();
 	}
 
-	public void load(final int numCentros) {    
-	    List<Centro> createCentros = createCentros(numCentros);
+	public void load() {    
+	    List<Centro> createCentros = createCentros(RepositoryConfig.NUM_CENTROS);
 	    repository.saveAll(createCentros);
 	}
 	

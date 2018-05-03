@@ -3,8 +3,6 @@ package com.msl.data.arangodb.promo.loader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Spliterators;
-import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -24,8 +22,8 @@ public class MarcaLoader implements IRepositoryLoader{
 	    repository.deleteAll();
 	}
 
-	public void load(final int numMarcas) {    
-	    Collection<Marca> createMarcas = createMarcas(numMarcas);
+	public void load() {    
+	    Collection<Marca> createMarcas = createMarcas(RepositoryConfig.NUM_MARCAS);
 //	    System.out.println(String.format("Save %s additional marcas", numMarcas));
 	    repository.saveAll(createMarcas);
 	     

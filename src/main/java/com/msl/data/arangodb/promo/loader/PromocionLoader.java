@@ -23,8 +23,8 @@ public class PromocionLoader implements IRepositoryLoader{
 	    repository.deleteAll();
 	}
 
-	public void load(final int numPromociones) {    
-	    Collection<Promocion> promociones = createPromos(numPromociones);
+	public void load() {    
+	    Collection<Promocion> promociones = createPromos(RepositoryConfig.NUM_PROMOS);
 //	    System.out.println(String.format("Save %s additional promociones", promociones.size()));
 	    repository.saveAll(promociones);
 	     

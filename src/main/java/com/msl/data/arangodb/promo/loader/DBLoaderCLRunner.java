@@ -70,50 +70,56 @@ public class DBLoaderCLRunner implements CommandLineRunner {
 	
 	@Override
 	public void run(final String... args) throws Exception {
-		System.out.println("Borrando base de datos");
-		IRepositoryLoader[] loaders = {empresaLoader, centroLoader, familiaLoader, marcaLoader, productoLoader, promocionLoader, 
-				empresaPromocionLoader, centroPromocionLoader, marcaPromocionLoader, productoPromocionLoader, 
-				centroEmpresaLoader, productoCentroLoader, productoMarcaLoader 
-				};
-		//db.dropDatabase();
+		IRepositoryLoader[] loaders = {empresaLoader, centroLoader, familiaLoader, marcaLoader, productoLoader, promocionLoader};
+		IRelacionableRepositoryLoader[] relacionableLoaders = {centroEmpresaLoader, productoCentroLoader, productoMarcaLoader};
+		IPromocionableRepositoryLoader[] promocionLoaders = {empresaPromocionLoader, centroPromocionLoader, marcaPromocionLoader, productoPromocionLoader};
 		deleteRepositories(loaders);
-		System.out.println("Cargando empresas:" + NUM_EMPRESAS);
-		empresaLoader.load(NUM_EMPRESAS);
-		System.out.println("Cargando centros:" + NUM_CENTROS);
-		centroLoader.load(NUM_CENTROS);		
-		System.out.println("Cargando familias:" + NUM_FAMILIAS);
-		familiaLoader.load(NUM_FAMILIAS);
-		System.out.println("Cargando marcas:" + NUM_MARCAS);
-		marcaLoader.load(NUM_MARCAS);
-		System.out.println("Cargando productos:" + NUM_PRODUCTOS);
-		productoLoader.load(NUM_PRODUCTOS);
-		System.out.println("Cargando promociones:" + NUM_PROMOS);
-		promocionLoader.load(NUM_PROMOS);
-		
-		System.out.println("Cargando promociones de empresas");
-		empresaPromocionLoader.loadPromociones();
-		System.out.println("Cargando promociones de centros");
-		centroPromocionLoader.loadPromociones();
-		System.out.println("Cargando promociones de familias");
-		familiaPromocionLoader.loadPromociones();
-		System.out.println("Cargando promociones de productos");
-		productoPromocionLoader.loadPromociones();
-		System.out.println("Cargando promociones de marcas");
-		marcaPromocionLoader.loadPromociones();
-		
-		System.out.println("Cargando relaciones entre centros y empresas");
-		centroEmpresaLoader.loadRelaciones();
-		System.out.println("Cargando relaciones entre productos y marcas");
-		productoMarcaLoader.loadRelaciones();
-		System.out.println("Cargando relaciones entre productos y centros");
-		productoCentroLoader.loadRelaciones();
-		System.out.println("Cargando relaciones entre productos y familias");
-		productoFamiliaLoader.loadRelaciones();
+		deletePromociones(promocionLoaders);
+		deleteRelaciones(relacionableLoaders);
+		loadRepositories(loaders);		
+		loadPromociones(promocionLoaders);
+		loadRelaciones(relacionableLoaders);
 	}
 	
 	private void deleteRepositories(IRepositoryLoader[] loaders) {
 		for (IRepositoryLoader loader : loaders) {
+			System.out.println("Borrando datos sobre " + loader);
 			loader.deleteAll();
+		}
+	}
+	
+	private void loadRepositories(IRepositoryLoader[] loaders) {
+		for (IRepositoryLoader loader : loaders) {
+			System.out.println("Cargando datos sobre " + loader);
+			loader.load();
+		}
+	}
+	
+	private void deleteRelaciones(IRelacionableRepositoryLoader[] loaders) {
+		for (IRelacionableRepositoryLoader loader : loaders) {
+			System.out.println("Borrando relaciones sobre " + loader);
+			loader.deleteRelaciones();
+		}
+	}
+	
+	private void loadRelaciones(IRelacionableRepositoryLoader[] loaders) {
+		for (IRelacionableRepositoryLoader loader : loaders) {
+			System.out.println("Cargando relaciones sobre " + loader);
+			loader.loadRelaciones();
+		}
+	}
+	
+	private void deletePromociones(IPromocionableRepositoryLoader[] loaders) {
+		for (IPromocionableRepositoryLoader loader : loaders) {
+			System.out.println("Borrado promociones de " + loader);
+			loader.deletePromociones();
+		}
+	}
+	
+	private void loadPromociones(IPromocionableRepositoryLoader[] loaders) {
+		for (IPromocionableRepositoryLoader loader : loaders) {
+			System.out.println("Cargando promociones sobre " + loader);
+			loader.loadPromociones();
 		}
 	}
 }

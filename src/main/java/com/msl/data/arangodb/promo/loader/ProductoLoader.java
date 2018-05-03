@@ -3,6 +3,8 @@ package com.msl.data.arangodb.promo.loader;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -13,6 +15,9 @@ import com.msl.data.arangodb.promo.repository.ProductoRepository;
 
 @Component
 public class ProductoLoader implements IRepositoryLoader{
+	
+	Logger logger = LoggerFactory.getLogger(ProductoLoader.class.getName());
+
 
 	@Autowired
 	private ProductoRepository repository;
@@ -21,8 +26,8 @@ public class ProductoLoader implements IRepositoryLoader{
 	    repository.deleteAll();
 	}
 
-	public void load(final int numProductos) {    
-		saveProductos(numProductos, 0);
+	public void load() {    
+		saveProductos(RepositoryConfig.NUM_PRODUCTOS, 0);
 	}
 	
 	
@@ -52,7 +57,7 @@ public class ProductoLoader implements IRepositoryLoader{
 		}
 	}
 
-	private List<Producto> createProductos(int start, int numProductos) {
+	private List<Producto> createProductosOld(int start, int numProductos) {
 		String cempresa = "123";
 		String centrooo = "1234";
 		String cdepartm = "1234";
@@ -66,6 +71,26 @@ public class ProductoLoader implements IRepositoryLoader{
 		String referencia = cempresa + centrooo + cdepartm + cfamilia + cbarraaa + ctallaec + cdivisio + cniveln + cfabrica + cmarmuma;
 		List<Producto> productos = new ArrayList<Producto>();
 		for (int i = start; i < numProductos + start; i++) {
+			productos.add(new Producto(referencia + i , "producto" + i));
+		}
+	    return productos;
+	}
+	
+	private List<Producto> createProductos(int start, int numProductos) {
+		logger.debug("Creando " + numProductos + " productos");
+		List<Producto> productos = new ArrayList<Producto>();		
+		for (int i = start; i < numProductos; i++) {
+			String cempresa = String.format("%03d",Integer.valueOf(i));
+			String centrooo = String.format("%04d",Integer.valueOf(i));
+			String cdepartm = String.format("%04d",Integer.valueOf(i));
+			String cfamilia = String.format("%03d",Integer.valueOf(i));
+			String cbarraaa = String.format("%04d",Integer.valueOf(i));
+			String ctallaec = String.format("%03d",Integer.valueOf(i));
+			String cdivisio = String.format("%02d",Integer.valueOf(i));
+			String cniveln = String.format("%01d",Integer.valueOf(i));
+			String cfabrica = String.format("%06d",Integer.valueOf(i));
+			String cmarmuma = String.format("%014d",Integer.valueOf(i));
+			String referencia = cempresa + centrooo + cdepartm + cfamilia + cbarraaa + ctallaec + cdivisio + cniveln + cfabrica + cmarmuma;
 			productos.add(new Producto(referencia + i , "producto" + i));
 		}
 	    return productos;

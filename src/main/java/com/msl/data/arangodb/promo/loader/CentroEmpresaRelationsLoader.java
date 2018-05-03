@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.msl.data.arangodb.promo.entity.Centro;
 import com.msl.data.arangodb.promo.entity.CentroEmpresa;
 import com.msl.data.arangodb.promo.entity.Empresa;
+import com.msl.data.arangodb.promo.entity.EntityUtil;
 import com.msl.data.arangodb.promo.entity.Relacionable;
 import com.msl.data.arangodb.promo.entity.RelacionableParent;
 import com.msl.data.arangodb.promo.repository.CentroRepository;
@@ -17,7 +18,7 @@ import com.msl.data.arangodb.promo.repository.EmpresaRepository;
 
 
 @Component
-public class CentroEmpresaRelationsLoader extends AbstractRelacionableRepositoryLoader implements IRepositoryLoader{
+public class CentroEmpresaRelationsLoader extends AbstractRelacionableRepositoryLoader implements IRelacionableRepositoryLoader{
 	@Autowired
 	private CentroRepository centroRepo;
 	
@@ -29,19 +30,11 @@ public class CentroEmpresaRelationsLoader extends AbstractRelacionableRepository
 
 	@Override
 	public void loadRelaciones() {
-		// first create some relations for the centros and empresas
+		// create some relations for the centros and empresas
 		Iterable<Centro> centros = centroRepo.findAll();
 		Iterable<Empresa> empresas = empresaRepo.findAll();
-		List<Relacionable> relacionables = new ArrayList<Relacionable>();
-		for (Centro centro : centros) {
-			relacionables.add((Relacionable)centro);
-		}
-		
-		List<RelacionableParent> parents = new ArrayList<RelacionableParent>();
-		for (Empresa empresa : empresas) {
-			parents.add((RelacionableParent)empresa);
-		}
-		
+		List<Relacionable> relacionables = EntityUtil.centroToRelacionable(centros);
+		List<RelacionableParent> parents = EntityUtil.empresaToRelacionableParent(empresas);
 		super.loadRelaciones(relacionables, parents);
 	}
 	
@@ -51,7 +44,7 @@ public class CentroEmpresaRelationsLoader extends AbstractRelacionableRepository
 	}
 	
 	@Override
-	public void deleteAll() {
+	public void deleteRelaciones() {
 		centroEmpresaRepo.deleteAll();
 	}
 }

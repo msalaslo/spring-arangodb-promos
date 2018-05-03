@@ -20,8 +20,8 @@ public class EmpresaLoader implements IRepositoryLoader{
 	    repository.deleteAll();
 	}
 
-	public void load(final int numEmpresas) {    
-	    List<Empresa> createEmpresas = createEmpresas(numEmpresas);
+	public void load() {    
+	    List<Empresa> createEmpresas = createEmpresas(RepositoryConfig.NUM_EMPRESAS);
 	    repository.saveAll(createEmpresas);
 	}
 	
