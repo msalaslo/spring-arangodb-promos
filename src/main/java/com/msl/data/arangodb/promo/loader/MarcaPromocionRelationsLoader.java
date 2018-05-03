@@ -3,6 +3,7 @@ package com.msl.data.arangodb.promo.loader;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,13 +14,12 @@ import com.msl.data.arangodb.promo.entity.Promocionable;
 import com.msl.data.arangodb.promo.repository.MarcaPromocionRepository;
 import com.msl.data.arangodb.promo.repository.MarcaRepository;
 
-
 @Component
 public class MarcaPromocionRelationsLoader extends AbstractPromocionableRepositoryLoader implements IRepositoryLoader{
-	
+
 	@Autowired
 	private MarcaRepository marcaRepository;
-	
+
 	@Autowired
 	private MarcaPromocionRepository marcaPromoRepo;
 	

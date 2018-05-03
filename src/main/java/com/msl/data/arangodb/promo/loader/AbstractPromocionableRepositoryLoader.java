@@ -41,7 +41,7 @@ public abstract class AbstractPromocionableRepositoryLoader implements IPromocio
 			}else {
 				cont++;
 			}			
-		}				
+		}
 	}
 	
 	public abstract void save(Promocionable promocionable, Promocion promocion);

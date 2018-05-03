@@ -3,8 +3,6 @@ package com.msl.data.arangodb.promo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.msl.data.arangodb.promo.loader.DBLoaderCLRunner;
-
 /**
  * Hello world!
  *

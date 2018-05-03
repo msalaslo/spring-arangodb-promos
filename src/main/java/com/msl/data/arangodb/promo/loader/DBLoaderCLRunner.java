@@ -5,6 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.ComponentScan;
 
 import com.msl.data.arangodb.promo.repository.DBRepository;
+import com.msl.data.arangodb.promo.repository.MarcaRepository;
 
 @ComponentScan("com.msl.data.arangodb.promo")
 public class DBLoaderCLRunner implements CommandLineRunner {
@@ -39,7 +40,7 @@ public class DBLoaderCLRunner implements CommandLineRunner {
 	
 	@Autowired
 	CentroEmpresaRelationsLoader centroEmpresaLoader;
-	
+
 	@Autowired
 	ProductoMarcaRelationsLoader productoMarcaLoader;
 	
@@ -63,6 +64,9 @@ public class DBLoaderCLRunner implements CommandLineRunner {
 
 	@Autowired
 	MarcaPromocionRelationsLoader marcaPromocionLoader;
+	
+	@Autowired
+	MarcaRepository marcaRepository;
 	
 	@Override
 	public void run(final String... args) throws Exception {
