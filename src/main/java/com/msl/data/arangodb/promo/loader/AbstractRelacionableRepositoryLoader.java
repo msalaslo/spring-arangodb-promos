@@ -2,11 +2,17 @@ package com.msl.data.arangodb.promo.loader;
 
 import java.util.Iterator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.msl.data.arangodb.promo.entity.Relacionable;
 import com.msl.data.arangodb.promo.entity.RelacionableParent;
 import com.msl.data.arangodb.promo.util.Util;
 
 public abstract class AbstractRelacionableRepositoryLoader implements IRelacionableRepositoryLoader{
+	
+	private static final Logger logger = LoggerFactory.getLogger(AbstractPromocionableRepositoryLoader.class.getName());
+
 	
 	public void loadRelaciones(Iterable<Relacionable> relacionables, Iterable<RelacionableParent> parents) {
 		int numParents = Util.getSize(parents);
@@ -15,12 +21,12 @@ public abstract class AbstractRelacionableRepositoryLoader implements IRelaciona
 		int section = numRelacionables/numParents;
 		int cont = 1;
 		RelacionableParent parent = ite.next();
-		System.out.println("Asociando el padre " + parent);
+		logger.debug("Asociando el padre " + parent);
 		for (Relacionable relacionable : relacionables) {		
-//			System.out.println("Asociando el padre " + parent + " al relacionable " + relacionable );
+//			logger.debug("Asociando el padre " + parent + " al relacionable " + relacionable );
 			this.save(relacionable, parent);
 			if(cont == section) {
-				System.out.println("Cambiando el padre " + parent);
+				logger.debug("Cambiando el padre " + parent);
 				if(ite.hasNext()) {
 					parent = ite.next();
 				}

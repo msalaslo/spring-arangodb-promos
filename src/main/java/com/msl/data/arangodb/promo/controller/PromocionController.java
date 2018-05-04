@@ -23,7 +23,7 @@ import com.msl.data.arangodb.promo.service.PromocionService;
 @RequestMapping("/promocion")
 public class PromocionController {
 	
-	Logger logger = LoggerFactory.getLogger("com.msl.data.arangodb.promo.controller.PromocionController");
+	private static final Logger logger = LoggerFactory.getLogger("com.msl.data.arangodb.promo.controller.PromocionController");
 	
 	@Autowired
 	PromocionService service;

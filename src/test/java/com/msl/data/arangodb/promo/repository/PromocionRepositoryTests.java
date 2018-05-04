@@ -9,6 +9,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -18,6 +20,8 @@ import com.msl.data.arangodb.promo.entity.Promocion;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class PromocionRepositoryTests {
+	
+	private static final Logger logger = LoggerFactory.getLogger(PromocionRepositoryTests.class.getName());
 	
 	public static final int NUM_PROMOS = 10000;
 
@@ -95,14 +99,14 @@ public class PromocionRepositoryTests {
 		for(Promocion value : result) {
 		   size++;
 		}
-		System.out.println("Product repository size:" + size);
+		logger.debug("Product repository size:" + size);
 		assertThat(result).isNotNull();
 	}
 	
 	@Test
 	public void createPromociones() {
 		Collection<Promocion> result = createPromociones(NUM_PROMOS);
-		System.out.println(String.format("Save %s additional promos", NUM_PROMOS));
+		logger.debug(String.format("Save %s additional promos", NUM_PROMOS));
 		repository.saveAll(result);
 		assertThat(result).extracting("codpromoci").contains(codpromoci);
 	}

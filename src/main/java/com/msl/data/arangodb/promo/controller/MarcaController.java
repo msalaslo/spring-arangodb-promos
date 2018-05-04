@@ -24,7 +24,7 @@ import com.msl.data.arangodb.promo.service.MarcaService;
 @RequestMapping("/marca")
 public class MarcaController {
 	
-	Logger logger = LoggerFactory.getLogger(MarcaController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(MarcaController.class.getName());
 	
 	@Autowired
 	MarcaService service;

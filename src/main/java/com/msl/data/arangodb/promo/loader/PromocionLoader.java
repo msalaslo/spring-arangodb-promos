@@ -3,9 +3,9 @@ package com.msl.data.arangodb.promo.loader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Spliterators;
-import java.util.stream.StreamSupport;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
@@ -15,6 +15,8 @@ import com.msl.data.arangodb.promo.repository.PromocionRepository;
 
 @Component
 public class PromocionLoader implements IRepositoryLoader{
+	
+	private static final Logger logger = LoggerFactory.getLogger(PromocionLoader.class.getName());
 
 	@Autowired
 	private PromocionRepository repository;
@@ -25,20 +27,19 @@ public class PromocionLoader implements IRepositoryLoader{
 
 	public void load() {    
 	    Collection<Promocion> promociones = createPromos(RepositoryConfig.NUM_PROMOS);
-//	    System.out.println(String.format("Save %s additional promociones", promociones.size()));
+//	    logger.debug(String.format("Save %s additional promociones", promociones.size()));
 	    repository.saveAll(promociones);
 	     
 //	    Iterable<Promocion> all = repository.findAll();
 //	    long count = StreamSupport.stream(Spliterators.spliteratorUnknownSize(all.iterator(), 0), false).count();
-//	    System.out.println(String.format("A total of %s promociones are persisted in the database", count));
+//	    logger.debug(String.format("A total of %s promociones are persisted in the database", count));
 	    
 //	    printAllPromosByCodpromoci(repository);
 	}
 	
 	public static void printAllPromosByCodpromoci(PromocionRepository repository) {
-		System.out.println("## Return all promociones sorted by name");
-		Iterable<Promocion> allSorted = repository.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "codpromoci")));
-		allSorted.forEach(System.out::println);
+		Iterable<Promocion> allSorted = repository.findAll(new Sort(Sort.Direction.ASC, "codpromoci"));
+		allSorted.forEach(item -> logger.debug(item.toString()));
 	}
 
 	private List<Promocion> createPromos(int numPromociones) {

@@ -2,6 +2,8 @@ package com.msl.data.arangodb.promo.loader;
 
 import java.util.Iterator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.msl.data.arangodb.promo.entity.Promocion;
@@ -10,6 +12,9 @@ import com.msl.data.arangodb.promo.repository.PromocionRepository;
 import com.msl.data.arangodb.promo.util.Util;
 
 public abstract class AbstractPromocionableRepositoryLoader implements IPromocionableRepositoryLoader {
+	
+	private static final Logger logger = LoggerFactory.getLogger(AbstractPromocionableRepositoryLoader.class.getName());
+
 	
 	@Autowired
 	private PromocionRepository promocionRepo;
@@ -26,10 +31,10 @@ public abstract class AbstractPromocionableRepositoryLoader implements IPromocio
 		Promocion promocion = itePromociones.next();
 	    boolean firstIterationFlag = true ;
 		for (Promocionable promocionable : promocionables) {	
-//			System.out.println("Asociando la promocion " + promocion + " al promocionable " + promocionable );
+//			logger.debug("Asociando la promocion " + promocion + " al promocionable " + promocionable );
 			this.save(promocionable, promocion);
 			if(firstIterationFlag) {
-				System.out.println("Asociando la promociones a " + promocionable );
+				logger.debug("Asociando la promociones a " + promocionable );
 				firstIterationFlag = false;
 			}
 			//Vamos asociando los promocionables a un conjunto equitativo de promociones

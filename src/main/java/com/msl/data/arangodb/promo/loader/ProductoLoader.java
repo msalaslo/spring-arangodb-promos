@@ -16,8 +16,7 @@ import com.msl.data.arangodb.promo.repository.ProductoRepository;
 @Component
 public class ProductoLoader implements IRepositoryLoader{
 	
-	Logger logger = LoggerFactory.getLogger(ProductoLoader.class.getName());
-
+	private static final Logger logger = LoggerFactory.getLogger(ProductoLoader.class.getName());
 
 	@Autowired
 	private ProductoRepository repository;
@@ -32,7 +31,7 @@ public class ProductoLoader implements IRepositoryLoader{
 	
 	
 	public void add(final int numProductos) {
-		Sort sort = new Sort(new Sort.Order(Direction.DESC, "name"));
+		Sort sort = new Sort(Direction.DESC, "name");
 		Iterable<Producto> productos = repository.findAll(sort);
 		Producto first = productos.iterator().next();
 		String lastProductoIndex = first.getName().substring("producto".length(),first.getName().length());
@@ -40,9 +39,8 @@ public class ProductoLoader implements IRepositoryLoader{
 	}
 	
 	public static void printAllProductosByName(ProductoRepository repository) {
-		System.out.println("## Return all productos sorted by name");
-		Iterable<Producto> allSorted = repository.findAll(new Sort(new Sort.Order(Sort.Direction.ASC, "name")));
-		allSorted.forEach(System.out::println);
+		Iterable<Producto> allSorted = repository.findAll(new Sort(Sort.Direction.ASC, "name"));
+		allSorted.forEach(item -> logger.debug(item.toString()));
 	}
 
 	private void saveProductos(int numProductos, int start) {
@@ -55,25 +53,6 @@ public class ProductoLoader implements IRepositoryLoader{
 				repository.saveAll(createProductos(i, numProductos));
 			}
 		}
-	}
-
-	private List<Producto> createProductosOld(int start, int numProductos) {
-		String cempresa = "123";
-		String centrooo = "1234";
-		String cdepartm = "1234";
-		String cfamilia = "123";
-		String cbarraaa = "1234";
-		String ctallaec = "123";
-		String cdivisio = "12";
-		String cniveln = "1";
-		String cfabrica = "123456";
-		String cmarmuma = "12345678901234";
-		String referencia = cempresa + centrooo + cdepartm + cfamilia + cbarraaa + ctallaec + cdivisio + cniveln + cfabrica + cmarmuma;
-		List<Producto> productos = new ArrayList<Producto>();
-		for (int i = start; i < numProductos + start; i++) {
-			productos.add(new Producto(referencia + i , "producto" + i));
-		}
-	    return productos;
 	}
 	
 	private List<Producto> createProductos(int start, int numProductos) {

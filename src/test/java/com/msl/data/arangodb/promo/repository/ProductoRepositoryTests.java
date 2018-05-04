@@ -9,6 +9,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -18,6 +20,8 @@ import com.msl.data.arangodb.promo.entity.Producto;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ProductoRepositoryTests {
+	
+	private static final Logger logger = LoggerFactory.getLogger(ProductoRepositoryTests.class.getName());
 
 	public static final int NUM_PRODS = 10;
 	
@@ -53,7 +57,7 @@ public class ProductoRepositoryTests {
 
 	private void createProductos() {
 		Collection<Producto> result = createProductos(NUM_PRODS);
-	    System.out.println(String.format("Save %s additional products", result.size()));
+	    logger.debug(String.format("Save %s additional products", result.size()));
 	    repository.saveAll(result);
 	}
 	
@@ -64,7 +68,7 @@ public class ProductoRepositoryTests {
 		for(Producto value : result) {
 		   size++;
 		}
-		System.out.println("Product repository size:" + size);
+		logger.debug("Product repository size:" + size);
 		assertThat(result).isNotNull();
 	}
 	
@@ -73,7 +77,7 @@ public class ProductoRepositoryTests {
 		Iterable<Producto> productos = repository.findAll();
 		for(Producto product : productos) {
 		   assertThat(product).isNotNull();
-		   System.out.println("Product name:" + product.getName());
+		   logger.debug("Product name:" + product.getName());
 		}
 	}
 
