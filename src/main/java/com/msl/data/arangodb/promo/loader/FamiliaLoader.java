@@ -27,12 +27,12 @@ public class FamiliaLoader implements IRepositoryLoader{
 	
 	private static List<Familia> createFamilias(int numFamilias) {
 		String namePrefix = "familia";
-		List<Familia> marcas = new ArrayList<Familia>();
+		List<Familia> familias = new ArrayList<Familia>();
 		for(int cfamilia = 0; cfamilia < numFamilias; cfamilia++){
 			String cfamiliaStr = String.format("%03d",Integer.valueOf(cfamilia));
-			Familia marca = new Familia(cfamiliaStr, namePrefix + cfamilia);
-			marcas.add(marca);
+			Familia familia = new Familia(cfamiliaStr, namePrefix + cfamilia);
+			familias.add(familia);
 		}
-	    return marcas;
+	    return familias;
 	  }
 }

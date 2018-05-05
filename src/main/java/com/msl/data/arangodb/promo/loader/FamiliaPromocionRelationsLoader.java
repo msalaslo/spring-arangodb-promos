@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.msl.data.arangodb.promo.entity.EntityUtils;
 import com.msl.data.arangodb.promo.entity.Familia;
 import com.msl.data.arangodb.promo.entity.FamiliaPromocion;
 import com.msl.data.arangodb.promo.entity.Promocion;
@@ -30,17 +31,11 @@ public class FamiliaPromocionRelationsLoader extends AbstractPromocionableReposi
 	
 	@Override
 	public void loadPromociones() {
-		Iterable<Familia> promocionables = familiaRepository.findAll();
-		List<Promocionable> lista = new ArrayList<Promocionable>();
-		for (Familia familia : promocionables) {
-			lista.add(familia);
-		}
-		super.loadPromociones(lista);
+		super.loadPromociones(EntityUtils.toPromocionable(familiaRepository.findAll()));
 	}
 	
 	@Override
 	public void save(Promocionable promocionable, Promocion promocion) {
 		familiaPromoRepo.save(new FamiliaPromocion((Familia)promocionable, promocion));
 	}
-
 }

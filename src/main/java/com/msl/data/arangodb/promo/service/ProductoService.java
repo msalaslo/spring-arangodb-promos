@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.arangodb.springframework.annotation.Param;
 import com.msl.data.arangodb.promo.entity.Producto;
 import com.msl.data.arangodb.promo.entity.Promocion;
 import com.msl.data.arangodb.promo.loader.ProductoLoader;
@@ -44,5 +45,9 @@ public class ProductoService {
 	}
 	public void add(int numProductos) {
 		loader.add(numProductos);
+	}
+	
+	public Iterable<Promocion> findAllPromocionesById(String id){
+		return repository.findAllPromocionesById(id);
 	}
 }

@@ -1,12 +1,9 @@
 package com.msl.data.arangodb.promo.loader;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.msl.data.arangodb.promo.entity.EntityUtils;
 import com.msl.data.arangodb.promo.entity.Marca;
 import com.msl.data.arangodb.promo.entity.MarcaPromocion;
 import com.msl.data.arangodb.promo.entity.Promocion;
@@ -30,12 +27,7 @@ public class MarcaPromocionRelationsLoader extends AbstractPromocionableReposito
 	
 	@Override
 	public void loadPromociones() {
-		Iterable<Marca> promocionables = marcaRepository.findAll();
-		List<Promocionable> lista = new ArrayList<Promocionable>();
-		for (Marca marca : promocionables) {
-			lista.add(marca);
-		}
-		super.loadPromociones(lista);
+		super.loadPromociones(EntityUtils.toPromocionable(marcaRepository.findAll()));
 	}
 	
 	@Override

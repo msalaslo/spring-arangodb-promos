@@ -6,10 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.msl.data.arangodb.promo.entity.EntityUtils;
 import com.msl.data.arangodb.promo.entity.Promocion;
 import com.msl.data.arangodb.promo.entity.Promocionable;
 import com.msl.data.arangodb.promo.repository.PromocionRepository;
-import com.msl.data.arangodb.promo.util.Util;
 
 public abstract class AbstractPromocionableRepositoryLoader implements IPromocionableRepositoryLoader {
 	
@@ -24,8 +24,8 @@ public abstract class AbstractPromocionableRepositoryLoader implements IPromocio
 		// first create some relations for the marcas and promociones		
 		Iterable<Promocion> promociones = promocionRepo.findAll();
 		Iterator<Promocion> itePromociones = promociones.iterator();
-		int numPromociones = Util.getSize(promociones);
-		int numPromocionables = Util.getSize(promocionables);
+		int numPromociones = EntityUtils.getSize(promociones);
+		int numPromocionables = EntityUtils.getSize(promocionables);
 		int section = numPromocionables/numPromociones;
 		int cont = 1;
 		Promocion promocion = itePromociones.next();

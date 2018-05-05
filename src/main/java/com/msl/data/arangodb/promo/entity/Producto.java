@@ -20,16 +20,16 @@ public class Producto implements Promocionable,Relacionable{
 	
 	public String name;
 	
-	@Relations(edges = ProductoPromocion.class, lazy = true)
+	@Relations(edges = ProductoPromocion.class, lazy = false)
 	private Collection<Promocion> promociones;
 	
-	@Relations(edges = ProductoMarca.class, lazy = true)
+	@Relations(edges = ProductoMarca.class, lazy = false)
 	private Collection<Marca> marcas;
 	
-	@Relations(edges = ProductoCentro.class, lazy = true)
+	@Relations(edges = ProductoCentro.class, lazy = false)
 	private Collection<Centro> centros;
 	
-	@Relations(edges = ProductoFamilia.class, lazy = true)
+	@Relations(edges = ProductoFamilia.class, lazy = false)
 	private Collection<Familia> familias;
 	
 	public Producto(String referencia, String name) {

@@ -1,12 +1,10 @@
 package com.msl.data.arangodb.promo.loader;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.msl.data.arangodb.promo.entity.Centro;
+import com.msl.data.arangodb.promo.entity.EntityUtils;
 import com.msl.data.arangodb.promo.entity.Producto;
 import com.msl.data.arangodb.promo.entity.ProductoCentro;
 import com.msl.data.arangodb.promo.entity.Relacionable;
@@ -29,20 +27,7 @@ public class ProductoCentroRelationsLoader extends AbstractRelacionableRepositor
 	
 	@Override
 	public void loadRelaciones() {
-		// first create some relations for the productos and centros
-		Iterable<Producto> productos = productoRepo.findAll();
-		Iterable<Centro> centros = centroRepo.findAll();
-		List<Relacionable> relacionables = new ArrayList<Relacionable>();
-		for (Producto producto : productos) {
-			relacionables.add((Relacionable)producto);
-		}
-		
-		List<RelacionableParent> parents = new ArrayList<RelacionableParent>();
-		for (Centro centro : centros) {
-			parents.add((RelacionableParent)centro);
-		}
-		
-		super.loadRelaciones(relacionables, parents);
+		super.loadRelaciones(EntityUtils.toRelacionable(productoRepo.findAll()), EntityUtils.toRelacionableParent(centroRepo.findAll()));
 	}
 	
 	@Override

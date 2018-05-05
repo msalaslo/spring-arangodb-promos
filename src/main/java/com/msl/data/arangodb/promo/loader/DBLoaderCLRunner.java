@@ -14,14 +14,6 @@ public class DBLoaderCLRunner implements CommandLineRunner {
 	
 	private static final Logger logger = LoggerFactory.getLogger(DBLoaderCLRunner.class.getName());
 
-
-	public static final int NUM_EMPRESAS = 5;
-	public static final int NUM_CENTROS = 10;
-	public static final int NUM_FAMILIAS = 100;
-	public static final int NUM_MARCAS = 1000;
-	public static final int NUM_PRODUCTOS = 10000;
-	public static final int NUM_PROMOS = 10;
-
 	@Autowired
 	DBRepository db;
 	

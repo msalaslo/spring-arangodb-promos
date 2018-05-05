@@ -2,6 +2,8 @@ package com.msl.data.arangodb.promo.repository;
 
 import java.util.Optional;
 
+import com.arangodb.springframework.annotation.Param;
+import com.arangodb.springframework.annotation.Query;
 import com.arangodb.springframework.repository.ArangoRepository;
 import com.msl.data.arangodb.promo.entity.Producto;
 import com.msl.data.arangodb.promo.entity.Promocion;
@@ -14,5 +16,6 @@ public interface ProductoRepository extends ArangoRepository<Producto> {
 	Iterable<Promocion> findPromocionesById(String id);
 	Iterable<Promocion> findPromocionesByName(String name);
 	Iterable<Promocion> findPromocionesByReferencia(String referencia);
-	Iterable<Producto> findByPromocionesCodpromoci(String codpromoci);
+	@Query("FOR v IN 1..10000000 OUTBOUND @id GRAPH 'marcaPromocion' RETURN v")
+	Iterable<Promocion> findAllPromocionesById(@Param("id") String value);
 }

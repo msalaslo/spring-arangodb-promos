@@ -67,7 +67,13 @@ public class ProductoController {
     
 	@GetMapping(path = "/add")
     public void add(@RequestParam(value="num", required=false, defaultValue="0") int num) {
-        logger.debug("Añadiendo promociones..." + num);
+        logger.debug("Añadiendo productos..." + num);
         service.add(num);
     }
+	
+	@GetMapping(path = "/findAllPromocionesById")
+    public Iterable<Promocion> findAllPromocionesById(@RequestParam(value="id", required=false, defaultValue="0") String id, Model model) {
+        logger.debug("Buscando TODAS promociones por id...");
+        return service.findAllPromocionesById(id);
+    }	
 }
