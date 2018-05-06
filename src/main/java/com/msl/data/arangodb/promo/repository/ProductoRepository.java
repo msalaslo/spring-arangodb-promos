@@ -16,6 +16,6 @@ public interface ProductoRepository extends ArangoRepository<Producto> {
 	Iterable<Promocion> findPromocionesById(String id);
 	Iterable<Promocion> findPromocionesByName(String name);
 	Iterable<Promocion> findPromocionesByReferencia(String referencia);
-	@Query("FOR v IN 1..10000000 OUTBOUND @id GRAPH 'marcaPromocion' RETURN v")
+	@Query("FOR v IN 1..10 OUTBOUND @id GRAPH 'marcaPromocion' RETURN v")
 	Iterable<Promocion> findAllPromocionesById(@Param("id") String value);
 }
