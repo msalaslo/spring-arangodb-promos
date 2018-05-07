@@ -1,6 +1,7 @@
 package com.msl.data.arangodb.promo.loader;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,29 +11,30 @@ import com.msl.data.arangodb.promo.entity.Centro;
 import com.msl.data.arangodb.promo.repository.CentroRepository;
 
 @Component
-public class CentroLoader implements IRepositoryLoader{
+public class CentroLoader implements IRepositoryLoader {
 
 	@Autowired
 	private CentroRepository repository;
-	
+
 	@Override
 	public void deleteAll() {
-	    repository.deleteAll();
+		repository.deleteAll();
 	}
 
-	public void load() {    
-	    List<Centro> createCentros = createCentros(RepositoryConfig.NUM_CENTROS);
-	    repository.saveAll(createCentros);
+	@Override
+	public void load() {
+		Collection<Centro> createCentros = createCentros(RepositoryConfig.NUM_CENTROS);
+		repository.saveAll(createCentros);
 	}
-	
-	private static List<Centro> createCentros(int numCentros) {
+
+	private static Collection<Centro> createCentros(int numCentros) {
 		String namePrefix = "centro";
 		List<Centro> centros = new ArrayList<Centro>();
-		for(int i = 0; i < numCentros; i++){
-			String ccentroStr = String.format("%04d",Integer.valueOf(i));
+		for (int i = 0; i < numCentros; i++) {
+			String ccentroStr = String.format("%04d", Integer.valueOf(i));
 			Centro centro = new Centro(ccentroStr, namePrefix + i);
 			centros.add(centro);
 		}
-	    return centros;
-	  }
+		return centros;
+	}
 }

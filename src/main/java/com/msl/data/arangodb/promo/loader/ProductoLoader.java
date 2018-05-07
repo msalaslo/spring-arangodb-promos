@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Component;
 
 import com.msl.data.arangodb.promo.entity.Producto;
@@ -22,20 +21,18 @@ public class ProductoLoader implements IRepositoryLoader {
 	@Autowired
 	private ProductoRepository repository;
 
+	@Override
 	public void deleteAll() {
 		repository.deleteAll();
 	}
 
+	@Override
 	public void load() {
 		saveProductos(RepositoryConfig.NUM_PRODUCTOS, 0);
 	}
 
 	public void add(final int numProductos) {
-		Sort sort = new Sort(Direction.DESC, "name");
-		Iterable<Producto> productos = repository.findAll(sort);
-		Producto first = productos.iterator().next();
-		String lastProductoIndex = first.getName().substring("producto".length(), first.getName().length());
-		saveProductos(numProductos, Integer.parseInt(lastProductoIndex));
+		saveProductos(numProductos, 0);
 	}
 
 	public static void printAllProductosByName(ProductoRepository repository) {
@@ -77,7 +74,7 @@ public class ProductoLoader implements IRepositoryLoader {
 		checkCreation(producto, referencia);
 		return producto;
 	}
-	
+
 	public Producto createProductoWithAttr(int i) {
 		String cempresa = String.format("%03d", Integer.valueOf(i));
 		String centrooo = String.format("%04d", Integer.valueOf(i));
@@ -95,7 +92,7 @@ public class ProductoLoader implements IRepositoryLoader {
 		checkCreation(producto, referencia);
 		return producto;
 	}
-	
+
 	private void checkCreation(Producto producto, String referencia) {
 		if (producto == null) {
 			logger.error("No se ha guardado el producto con refencia:" + referencia);
