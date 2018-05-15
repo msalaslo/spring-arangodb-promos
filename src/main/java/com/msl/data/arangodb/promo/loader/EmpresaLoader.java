@@ -10,29 +10,30 @@ import com.msl.data.arangodb.promo.entity.Empresa;
 import com.msl.data.arangodb.promo.repository.EmpresaRepository;
 
 @Component
-public class EmpresaLoader implements IRepositoryLoader{
+public class EmpresaLoader implements IRepositoryLoader {
 
 	@Autowired
 	private EmpresaRepository repository;
-	
+
 	@Override
 	public void deleteAll() {
-	    repository.deleteAll();
+		repository.deleteAll();
 	}
 
-	public void load() {    
-	    List<Empresa> createEmpresas = createEmpresas(RepositoryConfig.NUM_EMPRESAS);
-	    repository.saveAll(createEmpresas);
+	@Override
+	public void load() {
+		List<Empresa> createEmpresas = createEmpresas(RepositoryConfig.NUM_EMPRESAS);
+		repository.saveAll(createEmpresas);
 	}
-	
+
 	private static List<Empresa> createEmpresas(int numEmpresas) {
 		String namePrefix = "empresa";
 		List<Empresa> empresas = new ArrayList<Empresa>();
-		for(int cempresa = 0; cempresa < numEmpresas; cempresa++){
-			String cempresaStr = String.format("%03d",Integer.valueOf(cempresa));
+		for (int cempresa = 0; cempresa < numEmpresas; cempresa++) {
+			String cempresaStr = String.format("%03d", Integer.valueOf(cempresa));
 			Empresa empresa = new Empresa(cempresaStr, namePrefix + cempresa);
 			empresas.add(empresa);
 		}
-	    return empresas;
-	  }
+		return empresas;
+	}
 }
