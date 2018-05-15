@@ -30,7 +30,7 @@ public class Producto implements Promocionable,Relacionable{
 	private Collection<Centro> centros;
 	
 	@Relations(edges = ProductoFamilia.class, lazy = false)
-	private Collection<Familia> familias;
+	private Familia familia;
 	
 	public Producto(String referencia, String name) {
 		super();
@@ -86,12 +86,12 @@ public class Producto implements Promocionable,Relacionable{
 		this.centros = centros;
 	}
 
-	public Collection<Familia> getFamilias() {
-		return familias;
+	public Familia getFamilia() {
+		return familia;
 	}
 
-	public void setFamilias(Collection<Familia> familias) {
-		this.familias = familias;
+	public void setFamilia(Familia familia) {
+		this.familia = familia;
 	}
 
 	@Override
@@ -102,6 +102,7 @@ public class Producto implements Promocionable,Relacionable{
                 append("referencia", referencia).
                 append("promociones", promociones).
           	    append("marcas", marcas).
+          	    append("familia", familia).
         		toString();
     }
 }

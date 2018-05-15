@@ -1,5 +1,6 @@
 package com.msl.data.arangodb.promo.entity;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -19,9 +20,21 @@ public class EntityUtils {
 	    }
 		return count;
 	}
-
+	
+	public static <T> Stream<Relacionable> toRelacionableAsStream(final Stream<T> list) {
+		return list.map(x -> (Relacionable) x);
+	}
+	
+	public static <T> List<Relacionable> toRelacionable(final Stream<T> list) {
+		return list.map(x -> (Relacionable) x).collect(Collectors.toList());
+	}
+	
 	public static <T> List<Relacionable> toRelacionable(final List<T> list) {
 		return list.parallelStream().map(x -> (Relacionable) x).collect(Collectors.toList());
+	}
+	
+	public static <T> Stream<Relacionable> toRelacionableStream(final List<T> list) {
+		return list.parallelStream().map(x -> (Relacionable) x);
 	}
 
 	public static <T> Iterable<Relacionable> toRelacionable(final Iterable<T> iterable) {
@@ -30,6 +43,14 @@ public class EntityUtils {
 	
 	public static <T> Iterable<Relacionable> toRelacionable(final Iterator<T> entities) {
 		return iteratorToStream(entities, true).map(x -> (Relacionable) x).collect(Collectors.toList());
+	}
+	
+	public static <T> Stream<RelacionableParent> toRelacionableParentAsStream(final Stream<T> list) {
+		return list.map(x -> (RelacionableParent) x);
+	}
+	
+	public static <T> List<RelacionableParent> toRelacionableParent(final Stream<T> list) {
+		return list.map(x -> (RelacionableParent) x).collect(Collectors.toList());
 	}
 	
 	public static <T> List<RelacionableParent> toRelacionableParent(final List<T> list) {
@@ -42,6 +63,14 @@ public class EntityUtils {
 	
 	public static <T> Iterable<RelacionableParent> toRelacionableParent(final Iterator<T> entities) {
 		return iteratorToStream(entities, true).map(x -> (RelacionableParent) x).collect(Collectors.toList());
+	}
+	
+	public static <T> Stream<Promocionable> toPromocionableAsStream(final Stream<T> list) {
+		return list.map(x -> (Promocionable) x);
+	}
+	
+	public static <T> List<Promocionable> toPromocionable(final Stream<T> list) {
+		return list.map(x -> (Promocionable) x).collect(Collectors.toList());
 	}
 	
 	public static <T> List<Promocionable> toPromocionable(final List<T> list) {
@@ -64,4 +93,11 @@ public class EntityUtils {
 		Iterable<T> iterable = () -> iterator;
 		return StreamSupport.stream(iterable.spliterator(), parallell);
 	}
+	
+	public static <T> List<T> iterableToList(final Iterable<T> iterable) {
+		List<T> list = new ArrayList<T>();
+		iterable.iterator().forEachRemaining(list::add);
+		return list;
+	}
+	
 }

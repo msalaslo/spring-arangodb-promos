@@ -10,4 +10,5 @@ public interface PromocionRepository extends ArangoRepository<Promocion> {
 	public Promocion findByCodpromoci(String codpromoci);
     public Iterable<Promocion> findByCanlvnta(String canlvnta);   
     public Iterable<Promocion> findAll();
+    public long count();
 }

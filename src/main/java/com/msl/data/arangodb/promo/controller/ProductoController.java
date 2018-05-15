@@ -24,7 +24,7 @@ import com.msl.data.arangodb.promo.service.ProductoService;
 @RequestMapping("/producto")
 public class ProductoController {
 	
-	private static final Logger logger = LoggerFactory.getLogger("com.msl.data.arangodb.promo.controller.ProductoController");
+	private static final Logger logger = LoggerFactory.getLogger(ProductoController.class);
 	
 	@Autowired
 	ProductoService service;

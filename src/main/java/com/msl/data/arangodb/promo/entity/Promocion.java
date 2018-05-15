@@ -5,9 +5,12 @@ import org.springframework.data.annotation.Id;
 
 import com.arangodb.springframework.annotation.Document;
 import com.arangodb.springframework.annotation.HashIndex;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Document("promociones")
 @HashIndex(fields = { "codpromoci"}, unique = true)
+@JsonInclude(Include.NON_NULL)
 public class Promocion {
 
 	@Id

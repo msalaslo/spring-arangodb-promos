@@ -5,9 +5,9 @@
     </encoder>
   </appender>
 
-  <logger name="deng" level="DEBUG"/>
+  <logger name="deng" level="ERROR"/>
 
-  <root level="INFO">
+  <root level="ERROR">
     <appender-ref ref="STDOUT" />
   </root>
 </configuration>

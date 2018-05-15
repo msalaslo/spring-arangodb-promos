@@ -1,6 +1,8 @@
 package com.msl.data.arangodb.promo.loader;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 import com.msl.data.arangodb.promo.entity.EntityUtils;
@@ -33,6 +35,12 @@ public class ProductoFamiliaRelationsLoader extends AbstractRelacionableReposito
 	@Override
 	public void save(Relacionable relacionable, RelacionableParent parent) {
 		familiaProductoRepo.save(new ProductoFamilia((Producto)relacionable, (Familia)parent));
+	}
+	
+	@Override
+	public Iterable<Relacionable> getPage(int page, int pageSize) {
+		Page<Producto> entitiesPage = productoRepo.findAll(PageRequest.of(page, pageSize));
+		return EntityUtils.toRelacionable(entitiesPage.getContent());
 	}
 	
 	@Override

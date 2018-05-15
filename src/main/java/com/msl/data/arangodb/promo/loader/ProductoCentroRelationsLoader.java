@@ -1,6 +1,8 @@
 package com.msl.data.arangodb.promo.loader;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 import com.msl.data.arangodb.promo.entity.Centro;
@@ -38,5 +40,11 @@ public class ProductoCentroRelationsLoader extends AbstractRelacionableRepositor
 	@Override
 	public void deleteRelaciones() {
 		centroProductoRepo.deleteAll();
+	}
+
+	@Override
+	public Iterable<Relacionable> getPage(int page, int pageSize) {
+		Page<Producto> entitiesPage = productoRepo.findAll(PageRequest.of(page, pageSize));
+		return EntityUtils.toRelacionable(entitiesPage.getContent());
 	}
 }

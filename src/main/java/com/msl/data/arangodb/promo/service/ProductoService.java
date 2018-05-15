@@ -1,11 +1,14 @@
 package com.msl.data.arangodb.promo.service;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.arangodb.springframework.annotation.Param;
 import com.msl.data.arangodb.promo.entity.Producto;
 import com.msl.data.arangodb.promo.entity.Promocion;
 import com.msl.data.arangodb.promo.loader.ProductoLoader;
@@ -50,4 +53,12 @@ public class ProductoService {
 	public Iterable<Promocion> findAllPromocionesById(String id){
 		return repository.findAllPromocionesById(id);
 	}
+	
+//	public Iterable<Producto> findAllAsStream(){
+//		List<Producto> mapstream = Collections.emptyList();
+//		try (Stream<Producto> stream = repository.findAllAsStream()) {
+//			mapstream = stream.collect(Collectors.toList());
+//		}
+//		return mapstream;
+//	}
 }
