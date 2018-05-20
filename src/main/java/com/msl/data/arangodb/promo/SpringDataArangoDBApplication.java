@@ -12,15 +12,16 @@ import com.msl.data.arangodb.promo.loader.DBLoaderCLRunner;
  *
  */
 @SpringBootApplication
-public class GotApp {
+public class SpringDataArangoDBApplication {
 	
-	private static final Logger logger = LoggerFactory.getLogger(GotApp.class);
+	private static final Logger logger = LoggerFactory.getLogger(SpringDataArangoDBApplication.class);
+	public final static String name = "ArangoDB Promo";
 			
 	public static void main(final String... args) {
-		logger.info("Iniciando aplicacion");
-//		SpringApplication.run(GotApp.class, args);
-		SpringApplication.run(DBLoaderCLRunner.class, args);
+		logger.info("Iniciando aplicacion" + name);
+		SpringApplication.run(SpringDataArangoDBApplication.class, args);
+//		SpringApplication.run(DBLoaderCLRunner.class, args);
 //		System.exit(SpringApplication.exit(SpringApplication.run(runner, args)));
-		logger.info("Aplicacion iniciada");
+		logger.info("Aplicacion " + name + " iniciada");
 	}
 }

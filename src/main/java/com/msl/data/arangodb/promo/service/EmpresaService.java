@@ -5,41 +5,41 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.msl.data.arangodb.promo.entity.Marca;
+import com.msl.data.arangodb.promo.entity.Empresa;
 import com.msl.data.arangodb.promo.entity.Promocion;
-import com.msl.data.arangodb.promo.repository.MarcaRepository;
+import com.msl.data.arangodb.promo.repository.EmpresaRepository;
 
 @Service
-public class MarcaService {
+public class EmpresaService {
 
 	@Autowired
-	MarcaRepository repository;
+	EmpresaRepository repository;
 	
-    public Optional<Marca> findByid(String id){
+    public Optional<Empresa> findByid(String id){
     	return repository.findById(id);
     }
     
-    public Iterable<Marca> findByName(String name){
+    public Iterable<Empresa> findByName(String name){
     	return repository.findByName(name);
     }
     
-    public Iterable<Marca> findByCmarmuma(String cmarmuma){
-    	return repository.findByCmarmuma(cmarmuma);
+    public Iterable<Empresa> findByCempresa(String cempresa){
+    	return repository.findByCempresa(cempresa);
     }
     
     public Iterable<Promocion> findPromocionesById(String id){
     	return repository.findPromocionesById(id);
     }
     
-    public Iterable<Promocion> findPromocionesByCmarmuma(String cmarmuma){
-    	return repository.findPromocionesByCmarmuma(cmarmuma);
+    public Iterable<Promocion> findPromocionesByCempresa(String cempresa){
+    	return repository.findPromocionesByCempresa(cempresa);
     }
     
     public Iterable<Promocion> findPromocionesByName(String name){
     	return repository.findPromocionesByName(name);
     }
 
-	public Marca save(Marca product) {
+	public Empresa save(Empresa product) {
 		return repository.save(product);
 	}
 }

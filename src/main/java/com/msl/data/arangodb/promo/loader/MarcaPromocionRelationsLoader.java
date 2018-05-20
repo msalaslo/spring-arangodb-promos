@@ -34,5 +34,4 @@ public class MarcaPromocionRelationsLoader extends AbstractPromocionableReposito
 	public void save(Promocionable promocionable, Promocion promocion) {
 		marcaPromoRepo.save(new MarcaPromocion((Marca)promocionable, promocion));
 	}
-
 }

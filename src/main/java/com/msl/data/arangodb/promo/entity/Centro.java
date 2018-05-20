@@ -19,8 +19,11 @@ public class Centro implements Promocionable, Relacionable, RelacionableParent{
 	
 	public String name;
 	
-	@Relations(edges = EmpresaPromocion.class, lazy = true)
+	@Relations(edges = CentroPromocion.class, lazy = false)
 	public Collection<Promocion> promociones;
+	
+	@Relations(edges = CentroEmpresa.class, lazy = false)
+	private Collection<Empresa> empresa;
 	
 	public Collection<Promocion> getPromociones() {
 		return promociones;
@@ -29,7 +32,15 @@ public class Centro implements Promocionable, Relacionable, RelacionableParent{
 	public void setPromociones(Collection<Promocion> promociones) {
 		this.promociones = promociones;
 	}
-	
+
+	public Collection<Empresa> getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Collection<Empresa> empresa) {
+		this.empresa = empresa;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -59,7 +70,4 @@ public class Centro implements Promocionable, Relacionable, RelacionableParent{
 	public void setCentroo(String centroo) {
 		this.centroo = centroo;
 	}
-
-
-
 }

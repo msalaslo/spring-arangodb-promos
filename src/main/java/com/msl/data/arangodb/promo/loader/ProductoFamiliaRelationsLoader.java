@@ -1,5 +1,7 @@
 package com.msl.data.arangodb.promo.loader;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +20,9 @@ import com.msl.data.arangodb.promo.repository.ProductoRepository;
 
 @Component
 public class ProductoFamiliaRelationsLoader extends AbstractRelacionableRepositoryLoader implements IRelacionableRepositoryLoader{
+	
+	private static final Logger logger = LoggerFactory.getLogger(ProductoFamiliaRelationsLoader.class);
+
 	@Autowired
 	private FamiliaRepository familiaRepo;
 	
@@ -29,7 +34,9 @@ public class ProductoFamiliaRelationsLoader extends AbstractRelacionableReposito
 	
 	@Override
 	public void loadRelaciones() {
+		logger.info("Cargando relaciones de productos con familias");
 		super.loadRelaciones(EntityUtils.toRelacionable(productoRepo.findAll()), EntityUtils.toRelacionableParent(familiaRepo.findAll()));
+		logger.info("Relaciones cargadas");	
 	}
 	
 	@Override
@@ -45,6 +52,7 @@ public class ProductoFamiliaRelationsLoader extends AbstractRelacionableReposito
 	
 	@Override
 	public void deleteRelaciones() {
+		logger.info("Borrando relaciones entre familias y productos");
 		familiaProductoRepo.deleteAll();
 	}
 }

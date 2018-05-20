@@ -19,7 +19,7 @@ public class Familia implements Promocionable,RelacionableParent{
 	
 	public String name;
 	
-	@Relations(edges = EmpresaPromocion.class, lazy = true)
+	@Relations(edges = FamiliaPromocion.class, lazy = false)
 	public Collection<Promocion> promociones;
 	
 	public Collection<Promocion> getPromociones() {

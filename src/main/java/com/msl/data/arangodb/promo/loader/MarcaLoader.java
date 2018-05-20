@@ -26,19 +26,10 @@ public class MarcaLoader implements IRepositoryLoader {
 		repository.deleteAll();
 	}
 
+	@Override
 	public void load() {
 		Collection<Marca> createMarcas = createMarcas(RepositoryConfig.NUM_MARCAS);
-		// logger.debug(String.format("Save %s additional marcas", numMarcas));
 		repository.saveAll(createMarcas);
-
-		// Iterable<Marca> all = repository.findAll();
-		// long count =
-		// StreamSupport.stream(Spliterators.spliteratorUnknownSize(all.iterator(), 0),
-		// false).count();
-		// logger.debug(String.format("A total of %s marcas are persisted in the
-		// database", count));
-
-		// printAllMarcasByName(repository);
 	}
 
 	public static void printAllMarcasByName(MarcaRepository repository) {

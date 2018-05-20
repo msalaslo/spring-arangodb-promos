@@ -1,10 +1,6 @@
 package com.msl.data.arangodb.promo.service;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +25,10 @@ public class ProductoService {
     
     public Iterable<Producto> findByReferencia(String referencia){
     	return repository.findByReferencia(referencia);
+    }
+    
+    public Producto findByName(String name){
+    	return repository.findByName(name);
     }
     
     public Iterable<Promocion> findPromocionesById(String id){

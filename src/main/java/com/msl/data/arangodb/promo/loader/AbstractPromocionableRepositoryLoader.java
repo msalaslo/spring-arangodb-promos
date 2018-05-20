@@ -21,7 +21,7 @@ public abstract class AbstractPromocionableRepositoryLoader implements IPromocio
 	
 	@Override
 	public void loadPromociones(Iterable<Promocionable> promocionables) {
-		logger.debug("Cargando promociones");
+		logger.info("Cargando promociones");
 	    Long numPromociones = promocionRepo.count();
 		for (Promocionable promocionable : promocionables) {	
 			Promocion promocion = randomPromocion(numPromociones);

@@ -9,7 +9,7 @@ import com.arangodb.springframework.config.AbstractArangoConfiguration;
 
 @Configuration
 @EnableArangoRepositories(basePackages = { "com.msl.data.arangodb.promo" })
-public class GotConfiguration extends AbstractArangoConfiguration {
+public class SpringDataArangoDBConfiguration extends AbstractArangoConfiguration {
 	@Override
 	public Builder arango() {
 		return new ArangoDB.Builder().host("localhost", 8529).user("root").password("admin");

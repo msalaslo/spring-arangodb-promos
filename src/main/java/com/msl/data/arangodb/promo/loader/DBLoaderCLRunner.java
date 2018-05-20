@@ -35,13 +35,13 @@ public class DBLoaderCLRunner implements CommandLineRunner {
 	CentroEmpresaRelationsLoader centroEmpresaLoader;
 
 	@Autowired
-	ProductoMarcaRelationsLoader productoMarcaLoader;
-	
-	@Autowired
 	ProductoCentroRelationsLoader productoCentroLoader;
 	
 	@Autowired
 	ProductoFamiliaRelationsLoader productoFamiliaLoader;
+	
+	@Autowired
+	ProductoMarcaRelationsLoader productoMarcaLoader;
 	
 	@Autowired
 	EmpresaPromocionRelationsLoader empresaPromocionLoader;
@@ -64,8 +64,8 @@ public class DBLoaderCLRunner implements CommandLineRunner {
 	@Override
 	public void run(final String... args) throws Exception {
 		IRepositoryLoader[] loaders = {empresaLoader, centroLoader, familiaLoader, marcaLoader, productoLoader, promocionLoader};
-		IRelacionableRepositoryLoader[] relacionableLoaders = {centroEmpresaLoader, productoCentroLoader, productoMarcaLoader};
-		IPromocionableRepositoryLoader[] promocionLoaders = {empresaPromocionLoader, centroPromocionLoader, marcaPromocionLoader, productoPromocionLoader};
+		IRelacionableRepositoryLoader[] relacionableLoaders = {centroEmpresaLoader, productoCentroLoader, productoMarcaLoader, productoFamiliaLoader};
+		IPromocionableRepositoryLoader[] promocionLoaders = {empresaPromocionLoader, centroPromocionLoader, marcaPromocionLoader, familiaPromocionLoader, productoPromocionLoader};
 		deleteRepositories(loaders);
 		deletePromociones(promocionLoaders);
 		deleteRelaciones(relacionableLoaders);
@@ -76,28 +76,28 @@ public class DBLoaderCLRunner implements CommandLineRunner {
 	
 	private void deleteRepositories(IRepositoryLoader[] loaders) {
 		for (IRepositoryLoader loader : loaders) {
-			logger.debug("Borrando datos sobre " + loader);
+			logger.info("Borrando datos sobre " + loader);
 			loader.deleteAll();
 		}
 	}
 	
 	private void loadRepositories(IRepositoryLoader[] loaders) {
 		for (IRepositoryLoader loader : loaders) {
-			logger.debug("Cargando datos sobre " + loader);
+			logger.info("Cargando datos sobre " + loader);
 			loader.load();
 		}
 	}
 	
 	private void deleteRelaciones(IRelacionableRepositoryLoader[] loaders) {
 		for (IRelacionableRepositoryLoader loader : loaders) {
-			logger.debug("Borrando relaciones sobre " + loader);
+			logger.info("Borrando relaciones sobre " + loader);
 			loader.deleteRelaciones();
 		}
 	}
 	
 	private void loadRelaciones(IRelacionableRepositoryLoader[] loaders) {
 		for (IRelacionableRepositoryLoader loader : loaders) {
-			logger.debug("Cargando relaciones sobre " + loader);
+			logger.info("Cargando relaciones sobre " + loader);
 			loader.loadRelaciones();
 		}
 	}

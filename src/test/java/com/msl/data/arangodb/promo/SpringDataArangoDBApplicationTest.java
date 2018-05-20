@@ -7,7 +7,7 @@ import junit.framework.TestSuite;
 /**
  * Unit test for simple App.
  */
-public class GotAppTest 
+public class SpringDataArangoDBApplicationTest 
     extends TestCase
 {
     /**
@@ -15,7 +15,7 @@ public class GotAppTest
      *
      * @param testName name of the test case
      */
-    public GotAppTest( String testName )
+    public SpringDataArangoDBApplicationTest( String testName )
     {
         super( testName );
     }
@@ -25,7 +25,7 @@ public class GotAppTest
      */
     public static Test suite()
     {
-        return new TestSuite( GotAppTest.class );
+        return new TestSuite( SpringDataArangoDBApplicationTest.class );
     }
 
     /**

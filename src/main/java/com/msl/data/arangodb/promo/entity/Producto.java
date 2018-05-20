@@ -23,14 +23,16 @@ public class Producto implements Promocionable,Relacionable{
 	@Relations(edges = ProductoPromocion.class, lazy = false)
 	private Collection<Promocion> promociones;
 	
-	@Relations(edges = ProductoMarca.class, lazy = false)
-	private Collection<Marca> marcas;
-	
 	@Relations(edges = ProductoCentro.class, lazy = false)
 	private Collection<Centro> centros;
 	
+	//Si no lo ponemos como collection no se recuperan automaticamente en los findBy
 	@Relations(edges = ProductoFamilia.class, lazy = false)
-	private Familia familia;
+	private Collection<Familia> familia;
+	
+	//Si no lo ponemos como collection no se recuperan automaticamente en los findBy
+	@Relations(edges = ProductoMarca.class, lazy = false)
+	private Collection<Marca> marcas;
 	
 	public Producto(String referencia, String name) {
 		super();
@@ -86,11 +88,11 @@ public class Producto implements Promocionable,Relacionable{
 		this.centros = centros;
 	}
 
-	public Familia getFamilia() {
+	public Collection<Familia> getFamilia() {
 		return familia;
 	}
 
-	public void setFamilia(Familia familia) {
+	public void setFamilia(Collection<Familia> familia) {
 		this.familia = familia;
 	}
 
