@@ -19,8 +19,8 @@ public class SpringDataArangoDBApplication {
 			
 	public static void main(final String... args) {
 		logger.info("Iniciando aplicacion" + name);
-		SpringApplication.run(SpringDataArangoDBApplication.class, args);
-//		SpringApplication.run(DBLoaderCLRunner.class, args);
+//		SpringApplication.run(SpringDataArangoDBApplication.class, args);
+		SpringApplication.run(DBLoaderCLRunner.class, args);
 //		System.exit(SpringApplication.exit(SpringApplication.run(runner, args)));
 		logger.info("Aplicacion " + name + " iniciada");
 	}

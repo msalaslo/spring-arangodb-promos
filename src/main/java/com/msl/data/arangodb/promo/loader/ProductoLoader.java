@@ -1,8 +1,14 @@
 package com.msl.data.arangodb.promo.loader;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import com.msl.data.arangodb.promo.entity.Producto;
 import com.msl.data.arangodb.promo.repository.ProductoRepository;
+import com.msl.data.arangodb.promo.util.IdFileGenerator;
 
 @Component
 public class ProductoLoader implements IRepositoryLoader {
@@ -60,16 +67,33 @@ public class ProductoLoader implements IRepositoryLoader {
 	}
 
 	private List<Producto> createProductos(int start, int numProductos) {
+		logger.info("Creando " + numProductos + " productos. Desde el id:" + start);
+		List<Producto> productos = new ArrayList<Producto>();
+		
+		try (BufferedReader br = Files.newBufferedReader(Paths.get(IdFileGenerator.PATH))) {
+			for (int i = start; i < numProductos + start; i++) {
+				String referencia = br.readLine();
+				productos.add(createProducto(referencia, i));
+			}
+		} catch (IOException e) {
+			logger.error("Error generando productos a partir de la lista de IDs", e);
+		}
+		
+
+		return productos;
+	}
+	
+	public List<Producto> createProductosDinamicId(int start, int numProductos) {
 		logger.debug("Creando " + numProductos + " productos. Desde el id:" + start);
 		List<Producto> productos = new ArrayList<Producto>();
 		for (int i = start; i < numProductos + start; i++) {
-			productos.add(createProducto(i));
+			String referencia = String.valueOf(UUID.randomUUID());
+			productos.add(createProducto(referencia, i));
 		}
 		return productos;
 	}
 
-	private Producto createProducto(int i) {
-		String referencia = String.valueOf(UUID.randomUUID());
+	private Producto createProducto(String referencia, int i) {
 		Producto producto = new Producto(referencia, "producto" + i);
 		checkCreation(producto, referencia);
 		return producto;
