@@ -1,7 +1,10 @@
 package com.msl.data.arangodb.promo.repository;
 
 import java.util.Optional;
+import java.util.stream.Stream;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 
 import com.arangodb.springframework.annotation.Query;
@@ -14,8 +17,7 @@ public interface ProductoRepository extends ArangoRepository<Producto> {
 	public Iterable<Producto> findByReferencia(String referencia);
 	public Producto findByName(String name);
 	public Iterable<Producto> findAll();
-	@Query("FOR v IN productos RETURN v")
-	public Iterable<Producto> findAllAsStream();
+	public Page<Producto> findAll(Pageable pageable);
 	Iterable<Promocion> findPromocionesById(String id);
 	Iterable<Promocion> findPromocionesByName(String name);
 	Iterable<Promocion> findPromocionesByReferencia(String referencia);
@@ -28,4 +30,8 @@ public interface ProductoRepository extends ArangoRepository<Producto> {
 //			+ "centroEmpresa \r\n" + 
 //			"RETURN v")
 	Iterable<Promocion> findAllPromocionesById(@Param("id") String value);
+	
+//	java.lang.ClassCastException: com.msl.data.arangodb.promo.entity.Producto cannot be cast to java.util.stream.Stream
+	@Query("FOR v IN productos RETURN v")
+	public Stream<Producto> findAllAsStream();
 }

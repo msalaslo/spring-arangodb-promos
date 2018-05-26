@@ -14,11 +14,6 @@ public class IdFileGenerator {
 	private static final Logger logger = LoggerFactory.getLogger(IdFileGenerator.class.getName());
 	public static final String PATH = "c:/temp/ids.txt";
 
-	public static void main(String[] args) {
-		int numIDs = new Integer(args[0]);
-		generate(numIDs);
-	}
-	
 	public static void generate(int numIDs) {
 		// Get the file reference
 		Path path = Paths.get(PATH);
