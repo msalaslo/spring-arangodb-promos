@@ -82,13 +82,12 @@ public class ProductoComponent {
 	private static String getAttr(Producto producto, int attr) {
 		switch (attr) {
 		case ATTR_ID:
-			return producto.getId();
+			return String.valueOf(producto.getId());
 		case ATTR_REF:
-			return producto.getReferencia();
+			return String.valueOf(producto.getReferencia());
 		default:
-			return producto.getId();
+			return String.valueOf(producto.getId());
 		}
-
 	}
 
 	private static String getAttrPath(int attr) {
@@ -100,7 +99,6 @@ public class ProductoComponent {
 		default:
 			return PATH_ID;
 		}
-
 	}
 
 	private static void writeAttr(String attr, BufferedWriter writer) {
