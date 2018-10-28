@@ -26,11 +26,6 @@ public class PromocionService {
     	return repository.findByCanlvnta(canlvnta);
     }
     
-    public Iterable<Promocion> findPromocionesByCempresa(String cempresa){
-    	return repository.findPromocionesByCempresa(cempresa);
-    }
-    
-    
 	public Promocion save(Promocion promocion) {
 		return repository.save(promocion);
 	}

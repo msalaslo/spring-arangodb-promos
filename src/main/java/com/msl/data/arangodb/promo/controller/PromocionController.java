@@ -45,10 +45,4 @@ public class PromocionController {
     	Promocion savedProduct = this.service.save(promocion);
         return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
     }
-    
-	@GetMapping(path = "/findPromocionesByCempresa")
-    public Iterable<Promocion> findPromocionesByCempresa(@RequestParam(value="cempresa", required=false, defaultValue="0") String cempresa, Model model) {
-        logger.debug("Buscando promociones por cempresa...");
-        return service.findPromocionesByCempresa(cempresa);
-    }
 }

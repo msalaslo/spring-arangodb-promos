@@ -51,7 +51,13 @@ public class EmpresaController {
     public Iterable<Promocion> findPromocionesById(@RequestParam(value="id", required=false, defaultValue="0") String id, Model model) {
         logger.debug("Buscando promociones por id...");
         return service.findPromocionesById(id);
-    }		
+    }	
+	
+	@GetMapping(path = "/findPromocionesByCempresa")
+    public Iterable<Promocion> findPromocionesByCempresa(@RequestParam(value="cempresa", required=false, defaultValue="0") String cempresa, Model model) {
+        logger.debug("Buscando promociones por cempresa...");
+        return service.findPromocionesByCempresa(cempresa);
+    }	
 		
     @PostMapping(path = "/save")
     public ResponseEntity<Empresa> save(@RequestBody Empresa empresa) {
